@@ -100,7 +100,7 @@ function digitize(n) {
   output = ["Open", "Open", "Senior", "Open", "Open", "Senior"]
 */
 
-// My function
+// My code
 function openOrSenior(data) {
   let newArray = [];
   for (let member of data) {
@@ -126,7 +126,7 @@ function openOrSenior(data) {
   Note: Only valid inputs will be given.
 */
 
-// My function :
+// My code :
 function booleanToString(b) {
   return b === true ? "true" : "false";
 }
@@ -157,7 +157,7 @@ function booleanToString(b) {
   printer_error(s) => "8/22"
 */
 
-// My function :
+// My code :
 function printerError(s) {
   let maxLength = s.length;
   let error = 0;
@@ -185,3 +185,88 @@ const printerError = (s) => `${s.replace(/[a-m]/gi, "").length}/${s.length}`;
 
 const printerError = ($) =>
   [($.match(/[n-z]/g) || []).length, $.length].join("/");
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Return the number (count) of vowels in the given string.
+
+  We will consider a, e, i, o, u as vowels for this Kata (but not y).
+
+  The input string will only consist of lower case letters and/or spaces.
+*/
+
+// My code
+function getCount(str) {
+  let vowels = str.match(/[aeiou]/gi);
+  return vowels === null ? 0 : vowels.length;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Timmy & Sarah think they are in love, but around where they live, they will only know once they pick a flower each. If one of the flowers has an even number of petals and the other has an odd number of petals it means they are in love.
+
+  Write a function that will take the number of petals of each flower and return true if they are in love and false if they aren't.
+*/
+
+// My code
+function lovefunc(flower1, flower2) {
+  return (flower1 + flower2) % 2 === 0 ? false : true;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Create a function that returns the sum of the two lowest positive numbers given an array of minimum 4 positive integers. No floats or non-positive integers will be passed.
+
+  For example, when an array is passed like [19, 5, 42, 2, 77], the output should be 7.
+
+  [10, 343445353, 3453445, 3453545353453] should return 3453455.
+*/
+
+// My code
+function sumTwoSmallestNumbers(numbers) {
+  let sort = numbers.sort((a, b) => a - b);
+  return sort[0] + sort[1];
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  In this kata you have to correctly return who is the "survivor", ie: the last element of a Josephus permutation.
+
+  Basically you have to assume that n people are put into a circle and that they are eliminated in steps of k elements, like this:
+
+  josephus_survivor(7,3) => means 7 people in a circle;
+  one every 3 is eliminated until one remains
+  [1,2,3,4,5,6,7] - initial sequence
+  [1,2,4,5,6,7] => 3 is counted out
+  [1,2,4,5,7] => 6 is counted out
+  [1,4,5,7] => 2 is counted out
+  [1,4,5] => 7 is counted out
+  [1,4] => 5 is counted out
+  [4] => 1 counted out, 4 is the last element - the survivor!
+  The above link about the "base" kata description will give you a more thorough insight about the origin of this kind of permutation, but basically that's all that there is to know to solve this kata.
+
+  Notes and tips: using the solution to the other kata to check your function may be helpful, but as much larger numbers will be used, using an array/list to compute the number of the survivor may be too slow; you may assume that both n and k will always be >=1.
+*/
+
+// My code
+function josephusSurvivor(n, k) {
+  let people = [];
+  let p = 0;
+  for (let i = 0; i < n; i++) {
+    people.push(i + 1);
+  }
+  while (people.length > 1) {
+    p = (p + k - 1) % people.length;
+    people.splice(p, 1);
+  }
+  return people[0]
+}
+
+// Best pratice
+function josephusSurvivor(n, k) {
+  return n < 1 ? 1 : ((josephusSurvivor(n - 1, k) + --k) % n) + 1;
+}
