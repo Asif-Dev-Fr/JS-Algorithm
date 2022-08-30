@@ -305,4 +305,115 @@ const nine = (operation) => (!operation ? 9 : operation(9));
 const plus = (number) => (other_number) => other_number + number;
 const minus = (number) => (other_number) => other_number - number;
 const times = (number) => (other_number) => other_number * number;
-const dividedBy = (number) => (other_number) => Math.floor(other_number / number);
+const dividedBy = (number) => (other_number) =>
+  Math.floor(other_number / number);
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+
+  Examples
+  "din"      =>  "((("
+  "recede"   =>  "()()()"
+  "Success"  =>  ")())())"
+  "(( @"     =>  "))((" 
+  Notes
+  Assertion messages may be unclear about what they display in some languages. If you read "...It Should encode XXX", the "XXX" is the expected result, not the input!
+*/
+
+// My code
+function duplicateEncode(word) {
+  let letters = word.toLowerCase().split("");
+  let result = "";
+  letters.forEach((e, i) => {
+    if (letters.indexOf(e) !== i) {
+      result += ")";
+    } else if (letters.lastIndexOf(e) !== i) {
+      result += ")";
+    } else result += "(";
+  });
+
+  return result;
+}
+
+// Best pratice
+function duplicateEncode(word) {
+  return word
+    .toLowerCase()
+    .split("")
+    .map(function (a, i, w) {
+      return w.indexOf(a) == w.lastIndexOf(a) ? "(" : ")";
+    })
+    .join("");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
+
+  Note: a and b are not ordered!
+
+  Examples (a, b) --> output (explanation)
+  (1, 0) --> 1 (1 + 0 = 1)
+  (1, 2) --> 3 (1 + 2 = 3)
+  (0, 1) --> 1 (0 + 1 = 1)
+  (1, 1) --> 1 (1 since both are same)
+  (-1, 0) --> -1 (-1 + 0 = -1)
+  (-1, 2) --> 2 (-1 + 0 + 1 + 2 = 2)
+
+*/
+
+// My code
+function getSum(a, b) {
+  if (a === b) return a;
+  else {
+    let min = a < b ? a : b;
+    let max = a > b ? a : b;
+    let sum = 0;
+
+    for (let i = min; i <= max; i++) {
+      sum += i;
+    }
+
+    return sum;
+  }
+}
+
+// Best pratice
+const GetSum = (a, b) => {
+  let min = Math.min(a, b);
+  let max = Math.max(a, b);
+  return ((max - min + 1) * (min + max)) / 2;
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+
+  Example: (Input --> Output)
+
+  "Dermatoglyphics" --> true
+  "aba" --> false
+  "moOse" --> false (ignore letter case)
+*/
+
+// My code
+function isIsogram(str) {
+  let counter = 0;
+  str
+    .toLowerCase()
+    .split("")
+    .map(function (a, i, w) {
+      w.indexOf(a) == w.lastIndexOf(a) ? counter : (counter += 1);
+    });
+
+  return counter === 0 ? true : false;
+}
+
+// Best pratice
+function isIsogram(str) {
+  return new Set(str.toUpperCase()).size == str.length;
+}
