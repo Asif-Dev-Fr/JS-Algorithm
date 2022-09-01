@@ -417,3 +417,178 @@ function isIsogram(str) {
 function isIsogram(str) {
   return new Set(str.toUpperCase()).size == str.length;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  You will be given an array a and a value x. You need to do is check whether the provided array contains the value.
+
+  Array can contain numbers or strings. X can be either.
+
+  Return true if the array contains the value, false if not.
+*/
+
+// My code
+function check(a, x) {
+  return a.includes(x) ? true : false;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
+
+  Your task is to write a function maskify, which changes all but the last four characters into '#'.
+
+  Examples
+  "4556364607935616" --> "############5616"
+      "64607935616" -->      "#######5616"
+                "1" -->                "1"
+                  "" -->                 ""
+
+  // "What was the name of your first pet?"
+
+  "Skippy" --> "##ippy"
+
+  "Nananananananananananananananana Batman!"
+  -->
+  "####################################man!"
+*/
+
+// My code
+function maskify(cc) {
+  let split = cc.split("");
+  if (split.length > 4) {
+    let newArray = [];
+    split.forEach((number, index) => {
+      if (
+        index === split.length ||
+        index === split.length - 1 ||
+        index === split.length - 2 ||
+        index === split.length - 3 ||
+        index === split.length - 4
+      )
+        newArray.push(number);
+      else newArray.push("#");
+    });
+    return newArray.join("");
+  } else return split.join("");
+}
+
+// Best pratice
+function maskify(cc) {
+  return cc.slice(0, -4).replace(/./g, "#") + cc.slice(-4);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Write a program that finds the summation of every number from 1 to num. The number will always be a positive integer greater than 0.
+
+  For example:
+
+  summation(2) -> 3
+  1 + 2
+
+  summation(8) -> 36
+  1 + 2 + 3 + 4 + 5 + 6 + 7 + 8
+*/
+
+// My code
+var summation = function (num) {
+  let sum = 0;
+  for (let i = 0; i <= num; i++) {
+    sum += i;
+  }
+  return sum;
+};
+
+// Best pratices
+const summation = (n) => (n * (n + 1)) / 2;
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
+
+  If the function is passed a valid PIN string, return true, else return false.
+
+  Examples (Input --> Output)
+  "1234"   -->  true
+  "12345"  -->  false
+  "a234"   -->  false
+*/
+
+// My code
+function validatePIN(pin) {
+  let fourDigits = /^[0-9]{4}$/.test(pin);
+  let sixDigits = /^[0-9]{6}$/.test(pin);
+  return fourDigits || sixDigits === true ? true : false;
+}
+
+// Best pratices
+function validatePIN(pin) {
+  return /^(\d{4}|\d{6})$/.test(pin);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Yesterday you found some shoes in your room. Each shoe is described by two values:
+
+  type indicates if it's a left or a right shoe;
+  size is the size of the shoe.
+  Your task is to check whether it is possible to pair the shoes you found in such a way that each pair consists of a right and a left shoe of an equal size.
+
+  Example
+  For:
+
+  shoes = [[0, 21], 
+          [1, 23], 
+          [1, 21], 
+          [0, 23]]
+  the output should be true;
+
+  For:
+
+  shoes = [[0, 21], 
+          [1, 23], 
+          [1, 21], 
+          [1, 23]]
+  the output should be false.
+
+  Input/Output
+  [input] 2D integer array shoes
+  Array of shoes. Each shoe is given in the format [type, size], where type is either 0 or 1 for left and right respectively, and size is a positive integer.
+
+  Constraints: 2 ≤ shoes.length ≤ 50,  1 ≤ shoes[i][1] ≤ 100.
+
+  [output] a boolean value
+
+  true if it is possible to pair the shoes, false otherwise.
+*/
+
+// My code
+function pairOfShoes(shoes) {
+  const leftShoes = shoes
+    .filter((el) => el[0] === 0)
+    .sort((a, b) => a[1] - b[1])
+    .map((el) => el[1]);
+  const rightShoes = shoes
+    .filter((el) => el[0] === 1)
+    .sort((a, b) => a[1] - b[1])
+    .map((el) => el[1]);
+
+  if (leftShoes.length !== rightShoes.length) return false;
+  if (leftShoes.join("").includes(rightShoes.join(""))) return true;
+  return false;
+}
+
+// Best practice
+const pairOfShoes = (shoes) =>
+  Object.values(
+    shoes.reduce(
+      (pre, val) => ((pre[val[1]] = (pre[val[1]] || 0) + (val[0] || -1)), pre),
+      {}
+    )
+  ).every((val) => !val);
