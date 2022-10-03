@@ -644,3 +644,115 @@ function descendingOrder(n) {
 function descendingOrder(n) {
   return parseInt(String(n).split("").sort().reverse().join(""));
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
+
+  For example,
+
+  [true,  true,  true,  false,
+    true,  true,  true,  true ,
+    true,  false, true,  false,
+    true,  false, false, true ,
+    true,  true,  true,  true ,
+    false, false, true,  true]
+  The correct answer would be 17.
+
+  Hint: Don't forget to check for bad values like null/undefined
+*/
+
+// My code
+function countSheeps(arrayOfSheep) {
+  let count = 0;
+  for (let array of arrayOfSheep) {
+    if (array) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+// Best pratices
+function countSheeps(arrayOfSheeps) {
+  return arrayOfSheeps.filter(Boolean).length;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  There is a bus moving in the city, and it takes and drop some people in each bus stop.
+
+  You are provided with a list (or array) of integer pairs. Elements of each pair represent number of people get into bus (The first item) and number of people get off the bus (The second item) in a bus stop.
+
+  Your task is to return number of people who are still in the bus after the last bus station (after the last array). Even though it is the last bus stop, the bus is not empty and some people are still in the bus, and they are probably sleeping there :D
+
+  Take a look on the test cases.
+
+  Please keep in mind that the test cases ensure that the number of people in the bus is always >= 0. So the return integer can't be negative.
+
+  The second value in the first integer array is 0, since the bus is empty in the first bus stop.
+*/
+
+// My code
+var number = function (busStops) {
+  let peopleIn = 0;
+  let peopleOut = 0;
+  for (let pair of busStops) {
+    for (let i = 0; i < pair.length; i++) {
+      if (i === 0) peopleIn += pair[i];
+      else if (i === 1) peopleOut += pair[i];
+    }
+  }
+
+  return peopleIn - peopleOut;
+};
+
+// Best pratice
+var number = function (busStops) {
+  var totalPeople = 0;
+  for (var i = 0; i < busStops.length; i++) {
+    totalPeople += busStops[i][0];
+    totalPeople -= busStops[i][1];
+  }
+  return totalPeople;
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Rock Paper Scissors
+Let's play! You have to return which player won! In case of a draw return Draw!.
+
+  Examples(Input1, Input2 --> Output):
+
+  "scissors", "paper" --> "Player 1 won!"
+  "scissors", "rock" --> "Player 2 won!"
+  "paper", "paper" --> "Draw!"
+*/
+
+// My code
+const rps = (p1, p2) => {
+  let p1Won = "Player 1 won!";
+  let p2Won = "Player 2 won!";
+  if (p1 === p2) return "Draw!";
+
+  if (p1 === "rock" && p2 === "scissors") return p1Won;
+  else if (p1 === "scissors" && p2 === "paper") return p1Won;
+  else if (p1 === "paper" && p2 === "rock") return p1Won;
+  else if (p2 === "rock" && p1 === "scissors") return p2Won;
+  else if (p2 === "scissors" && p1 === "paper") return p2Won;
+  else if (p2 === "paper" && p1 === "rock") return p2Won;
+};
+
+// Best pratice
+function rps(p1, p2) {
+  if (p1 === p2) return "Draw!";
+  var rules = { rock: "scissors", paper: "rock", scissors: "paper" };
+  if (p2 === rules[p1]) {
+    return "Player 1 won!";
+  } else {
+    return "Player 2 won!";
+  }
+}
