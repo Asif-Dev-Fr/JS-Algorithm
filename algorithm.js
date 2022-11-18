@@ -723,7 +723,7 @@ var number = function (busStops) {
 
 /*
   Rock Paper Scissors
-Let's play! You have to return which player won! In case of a draw return Draw!.
+  Let's play! You have to return which player won! In case of a draw return Draw!.
 
   Examples(Input1, Input2 --> Output):
 
@@ -755,4 +755,109 @@ function rps(p1, p2) {
   } else {
     return "Player 2 won!";
   }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Écrivez un programme qui affiche la température la plus proche de 0 parmi les données d'entrée. Si deux nombres sont aussi proches de zéro, alors l'entier positif sera considéré comme étant le plus proche de zéro (par exemple, si les températures sont -5 et 5, alors afficher 5).
+
+  Affichez 0 (zéro) si aucune température n'est fournie. Sinon, affichez la température la plus proche de 0
+*/
+
+// My code
+function findTemperature(param) {
+  let closestToZero = 10000;
+  if (param.length === 0) return (closestToZero = 0);
+  for (let number of param) {
+    if (Math.abs(number) < Math.abs(closestToZero)) {
+      closestToZero = number;
+    } else if (Math.abs(number) === Math.abs(closestToZero)) {
+      closestToZero = Math.abs(number);
+    }
+  }
+  return closestToZero;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Write simple .camelCase method (camel_case function in PHP, CamelCase in C# or camelCase in Java) for strings. All words must have their first letter capitalized without spaces.
+
+  For instance:
+
+  "hello case".camelCase() => HelloCase
+  "camel case word".camelCase() => CamelCaseWord
+*/
+
+// My code
+String.prototype.camelCase = function () {
+  return this.split(" ")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join("");
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Trolls are attacking your comment section!
+
+  A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
+
+  Your task is to write a function that takes a string and return a new string with all vowels removed.
+
+  For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
+
+  Note: for this kata y isn't considered a vowel.
+*/
+
+// My code
+function disemvowel(str) {
+  let split = str.split(" ");
+  return (withoutVowel = split
+    .map((l) => l.replace(/[aeiouAEIOU]/g, ""))
+    .join(" "));
+}
+
+// Best pratice
+function disemvowel(str) {
+  return str.replace(/[aeiou]/gi, "");
+}
+
+const vowels = "aeiou";
+function disemvowel(str) {
+  return str
+    .split("")
+    .filter((letter) => !vowels.includes(letter.toLowerCase()))
+    .join("");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Story
+  Ben has a very simple idea to make some profit: he buys something and sells it again. Of course, this wouldn't give him any profit at all if he was simply to buy and sell it at the same price. Instead, he's going to buy it for the lowest possible price and sell it at the highest.
+
+  Task
+  Write a function that returns both the minimum and maximum number of the given list/array.
+
+  Examples (Input --> Output)
+  [1,2,3,4,5] --> [1,5]
+  [2334454,5] --> [5,2334454]
+  [1]         --> [1,1]
+  Remarks
+  All arrays or lists will always have at least one element, so you don't need to check the length. Also, your function will always get an array or a list, you don't have to check for null, undefined or similar.
+*/
+
+// My code
+function minMax(arr) {
+  arr = arr.sort((a, b) => a - b);
+  return [arr[0], arr[arr.length - 1]];
+}
+
+// Best pratice
+function minMax(arr) {
+  return [Math.min(...arr), Math.max(...arr)];
 }
