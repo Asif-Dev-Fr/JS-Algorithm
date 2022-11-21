@@ -1007,3 +1007,97 @@ function findEvenIndex(arr) {
     return false;
   });
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  After a hard quarter in the office you decide to get some rest on a vacation. So you will book a flight for you and your girlfriend and try to leave all the mess behind you.
+
+  You will need a rental car in order for you to get around in your vacation. The manager of the car rental makes you some good offers.
+
+  Every day you rent the car costs $40. If you rent the car for 7 or more days, you get $50 off your total. Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
+
+  Write a code that gives out the total amount for different days(d).
+*/
+
+// My code
+function rentalCarCost(d) {
+  let costTotal = 0;
+  if (d < 3) {
+    costTotal = d * 40;
+  } else if (d > 2 && d < 7) {
+    costTotal = d * 40 - 20;
+  } else {
+    costTotal = d * 40 - 50;
+  }
+  return costTotal;
+}
+
+// Best pratice
+function baseCost(days, rate) {
+  return days * rate;
+}
+
+function discountRate(days) {
+  if (days >= 7) {
+    return 50;
+  } else if (days >= 3) {
+    return 20;
+  } else {
+    return 0;
+  }
+}
+
+function rentalCarCost(days) {
+  return baseCost(days, 40) - discountRate(days);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Very simple, given an integer or a floating-point number, find its opposite.
+
+  Examples:
+
+  1: -1
+  14: -14
+  -34: 34
+*/
+
+// My code
+function opposite(number) {
+  return -number;
+}
+
+// Alternative
+function opposite(number) {
+  return number * -1;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  All of the animals are having a feast! Each animal is bringing one dish. There is just one rule: the dish must start and end with the same letters as the animal's name. For example, the great blue heron is bringing garlic naan and the chickadee is bringing chocolate cake.
+
+  Write a function feast that takes the animal's name and dish as arguments and returns true or false to indicate whether the beast is allowed to bring the dish to the feast.
+
+  Assume that beast and dish are always lowercase strings, and that each has at least two letters. beast and dish may contain hyphens and spaces, but these will not appear at the beginning or end of the string. They will not contain numerals.
+*/
+
+// My code
+function feast(beast, dish) {
+  return (
+    beast.split("")[0] === dish.split("")[0] &&
+    beast.split("")[beast.split("").length - 1] ===
+      dish.split("")[dish.split("").length - 1]
+  );
+}
+
+// Best practice
+function feast(beast, dish) {
+  return (
+    beast[0] === dish[0] && beast[beast.length - 1] === dish[dish.length - 1]
+  );
+}
