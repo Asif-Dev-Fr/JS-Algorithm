@@ -1101,3 +1101,80 @@ function feast(beast, dish) {
     beast[0] === dish[0] && beast[beast.length - 1] === dish[dish.length - 1]
   );
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Can you find the needle in the haystack?
+
+  Write a function findNeedle() that takes an array full of junk but containing one "needle"
+
+  After your function finds the needle it should return a message (as a string) that says:
+
+  "found the needle at position " plus the index it found the needle, so:
+
+  Example(Input --> Output)
+
+  ["hay", "junk", "hay", "hay", "moreJunk", "needle", "randomJunk"] --> "found the needle at position 5" 
+
+*/
+
+// My code
+function findNeedle(haystack) {
+  return "found the needle at position " + haystack.indexOf("needle");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Make a program that filters a list of strings and returns a list with only your friends name in it.
+
+  If a name has exactly 4 letters in it, you can be sure that it has to be a friend of yours! Otherwise, you can be sure he's not...
+
+  Ex: Input = ["Ryan", "Kieran", "Jason", "Yous"], Output = ["Ryan", "Yous"]
+
+  i.e.
+
+  friend ["Ryan", "Kieran", "Mark"] `shouldBe` ["Ryan", "Mark"]
+  Note: keep the original order of the names in the output.
+
+*/
+
+// My code
+function friend(friends) {
+  let newArray = [];
+  friends.map((friend) => {
+    if (friend.length === 4) newArray.push(friend);
+  });
+  return newArray;
+}
+
+// Best pratices
+function friend(friends) {
+  return friends.filter((n) => n.length === 4);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function that takes an array of strings as an argument and returns a sorted array containing the same strings, ordered from shortest to longest.
+
+  For example, if this array were passed as an argument:
+
+  ["Telescopes", "Glasses", "Eyes", "Monocles"]
+
+  Your function would return the following array:
+
+  ["Eyes", "Glasses", "Monocles", "Telescopes"]
+
+  All of the strings in the array passed to your function will be different lengths, so you will not have to decide how to order multiple strings of the same length.
+
+*/
+
+// My code
+function sortByLength(array) {
+  return array.sort((a, b) => a.length - b.length);
+}
