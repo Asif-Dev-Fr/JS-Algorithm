@@ -1178,3 +1178,53 @@ function friend(friends) {
 function sortByLength(array) {
   return array.sort((a, b) => a.length - b.length);
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  Build Tower
+  Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
+
+  For example, a tower with 3 floors looks like this:
+
+  [
+    "  *  ",
+    " *** ", 
+    "*****"
+  ]
+  And a tower with 6 floors looks like this:
+
+  [
+    "     *     ", 
+    "    ***    ", 
+    "   *****   ", 
+    "  *******  ", 
+    " ********* ", 
+    "***********"
+  ]
+
+*/
+
+// My code
+function towerBuilder(nFloors) {
+  // build here
+  let array = [];
+  let sign = "*";
+  let space = " ";
+  for (let i = 0; i < nFloors; i++) {
+    array.push(
+      space.repeat(nFloors - i - 1) +
+        sign.repeat(i * 2 + 1) +
+        space.repeat(nFloors - i - 1)
+    );
+  }
+  return array;
+}
+
+// Best pratice
+function towerBuilder(n) {
+  return Array.from({ length: n }, function (v, k) {
+    const spaces = " ".repeat(n - k - 1);
+    return spaces + "*".repeat(k + k + 1) + spaces;
+  });
+}
