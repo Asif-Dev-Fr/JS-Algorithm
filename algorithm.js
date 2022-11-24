@@ -1228,3 +1228,134 @@ function towerBuilder(n) {
     return spaces + "*".repeat(k + k + 1) + spaces;
   });
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Your task is to make two functions ( max and min, or maximum and minimum, etc., depending on the language ) that receive a list of integers as input, and return the largest and lowest number in that list, respectively.
+
+  Examples (Input -> Output)
+  * [4,6,2,1,9,63,-134,566]         -> max = 566, min = -134
+  * [-52, 56, 30, 29, -54, 0, -110] -> min = -110, max = 56
+  * [42, 54, 65, 87, 0]             -> min = 0, max = 87
+  * [5]                             -> min = 5, max = 5
+  Notes
+  You may consider that there will not be any empty arrays/vectors.
+*/
+
+// My code
+var min = function (list) {
+  return Math.min(...list);
+};
+
+var max = function (list) {
+  return Math.max(...list);
+};
+
+// Alternative
+var min = function (list) {
+  list.sort((a, b) => a - b);
+  return list[0];
+};
+
+var max = function (list) {
+  list.sort((a, b) => b - a);
+  return list[0];
+};
+
+const min = (list) => Math.min(...list);
+const max = (list) => Math.max(...list);
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function that accepts an integer n and a string s as parameters, and returns a string of s repeated exactly n times.
+
+  Examples (input -> output)
+  6, "I"     -> "IIIIII"
+  5, "Hello" -> "HelloHelloHelloHelloHello"
+*/
+
+// My code
+const repeatStr = (n, s) => s.repeat(n);
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+
+  #Examples:
+
+  Kata.getMiddle("test") should return "es"
+
+  Kata.getMiddle("testing") should return "t"
+
+  Kata.getMiddle("middle") should return "dd"
+
+  Kata.getMiddle("A") should return "A"
+*/
+
+// My code
+function getMiddle(s) {
+  let middle = s.length / 2;
+  if (middle % 1 === 0) {
+    return s[middle - 1] + s[middle];
+  } else {
+    return s[middle - 0.5];
+  }
+}
+
+// Best pratice
+function getMiddle(s) {
+  var middle = s.length / 2;
+  return s.length % 2
+    ? s.charAt(Math.floor(middle))
+    : s.slice(middle - 1, middle + 1);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
+
+  For example (Input --> Output):
+
+  39 --> 3 (because 3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit)
+  999 --> 4 (because 9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, and finally 1*2 = 2)
+  4 --> 0 (because 4 is already a one-digit number)
+*/
+
+// My code
+function persistence(num) {
+  let persistentNumber = 0;
+  let split = num.toString().split("");
+
+  while (split.length !== 1) {
+    persistentNumber++;
+    split = split.reduce((a, b) => a * b);
+    split = split.toString().split("");
+  }
+  return persistentNumber;
+}
+
+// Best pratices
+function persistence(num) {
+  var times = 0;
+
+  num = num.toString();
+
+  while (num.length > 1) {
+    times++;
+    num = num
+      .split("")
+      .map(Number)
+      .reduce((a, b) => a * b)
+      .toString();
+  }
+
+  return times;
+}
