@@ -1359,3 +1359,121 @@ function persistence(num) {
 
   return times;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Count the number of Duplicates
+  Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+
+  Example
+  "abcde" -> 0 # no characters repeats more than once
+  "aabbcde" -> 2 # 'a' and 'b'
+  "aabBcde" -> 2 # 'a' occurs twice and 'b' twice (`b` and `B`)
+  "indivisibility" -> 1 # 'i' occurs six times
+  "Indivisibilities" -> 2 # 'i' occurs seven times and 's' occurs twice
+  "aA11" -> 2 # 'a' and '1'
+  "ABBA" -> 2 # 'A' and 'B' each occur twice
+*/
+
+// My code
+function duplicateCount(text) {
+  let duplicates = 0;
+  if (text.length === 0) return 0;
+  else {
+    let obj = {};
+    for (let letter of text.toLowerCase()) {
+      if (obj[letter]) {
+        obj[letter] += 1;
+      } else {
+        obj[letter] = 1;
+      }
+    }
+    for (let occurence in obj) {
+      if (obj[occurence] > 1) {
+        duplicates += 1;
+      }
+    }
+    return duplicates;
+  }
+}
+
+// Best pratices
+function duplicateCount(text) {
+  return (
+    text
+      .toLowerCase()
+      .split("")
+      .sort()
+      .join("")
+      .match(/([^])\1+/g) || []
+  ).length;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Nathan loves cycling.
+
+  Because Nathan knows it is important to stay hydrated, he drinks 0.5 litres of water per hour of cycling.
+
+  You get given the time in hours and you need to return the number of litres Nathan will drink, rounded to the smallest value.
+
+  For example:
+
+  time = 3 ----> litres = 1
+
+  time = 6.7---> litres = 3
+
+  time = 11.8--> litres = 5
+*/
+
+// My code
+function litres(time) {
+  return Math.floor(time * 0.5);
+}
+// Math.ceil(7.004) = 8
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  There is an array with some numbers. All numbers are equal except for one. Try to find it!
+
+  findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
+  findUniq([ 0, 0, 0.55, 0, 0 ]) === 0.55
+  It’s guaranteed that array contains at least 3 numbers.
+
+  The tests contain some very huge arrays, so think about performance.
+*/
+
+// My code
+function findUniq(arr) {
+  let obj = {};
+  for (let list of arr) {
+    if (obj[list]) {
+      obj[list]++;
+    } else {
+      obj[list] = 1;
+    }
+  }
+  let single;
+  for (let count in obj) {
+    if (obj[count] === 1) {
+      single = count;
+    }
+  }
+  return single % 1 === 0 ? parseInt(single) : parseFloat(single);
+}
+
+// Best pratice
+function findUniq(arr) {
+  arr.sort((a, b) => a - b);
+  return arr[0] == arr[1] ? arr.pop() : arr[0];
+}
+
+function findUniq(arr) {
+  return arr.find((n) => arr.indexOf(n) === arr.lastIndexOf(n));
+}
