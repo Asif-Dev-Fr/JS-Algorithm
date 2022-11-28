@@ -1477,3 +1477,178 @@ function findUniq(arr) {
 function findUniq(arr) {
   return arr.find((n) => arr.indexOf(n) === arr.lastIndexOf(n));
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function that takes an array of numbers and returns the sum of the numbers. The numbers can be negative or non-integer. If the array does not contain any numbers then you should return 0.
+
+  Examples
+  Input: [1, 5.2, 4, 0, -1]
+  Output: 9.2
+
+  Input: []
+  Output: 0
+
+  Input: [-2.398]
+  Output: -2.398
+
+  Assumptions
+  You can assume that you are only given numbers.
+  You cannot assume the size of the array.
+  You can assume that you do get an array and if the array is empty, return 0.
+*/
+
+// My code
+function sum(numbers) {
+  if (numbers.length === 0) return 0;
+  else return numbers.reduce((a, b) => a + b);
+}
+
+// Best pratice
+function sum(numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Your task is to create a function that does four basic mathematical operations.
+
+  The function should take three arguments - operation(string/char), value1(number), value2(number).
+  The function should return result of numbers after applying the chosen operation.
+
+  Examples(Operator, value1, value2) --> output
+  ('+', 4, 7) --> 11
+  ('-', 15, 18) --> -3
+  ('*', 5, 5) --> 25
+  ('/', 49, 7) --> 7
+*/
+
+// My code
+function basicOp(operation, value1, value2) {
+  switch (operation) {
+    case "+":
+      return value1 + value2;
+    case "-":
+      return value1 - value2;
+    case "*":
+      return value1 * value2;
+    case "/":
+      return value1 / value2;
+    default:
+      return null;
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+
+  Example
+  createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
+  The returned format must be correct in order to complete this challenge.
+
+  Don't forget the space after the closing parentheses!
+*/
+
+// My code
+function createPhoneNumber(numbers) {
+  let indexArray = [];
+  let firstPart = [];
+  let secondPart = [];
+
+  for (const [index, value] of numbers.entries()) {
+    console.log(index, value);
+    if (index < 3) {
+      indexArray.push(value);
+    } else if (index > 2 && index <= 5) {
+      firstPart.push(value);
+    } else secondPart.push(value);
+  }
+
+  let phoneNumber =
+    "(" +
+    indexArray.join("") +
+    ")" +
+    " " +
+    firstPart.join("") +
+    "-" +
+    secondPart.join("");
+  return phoneNumber;
+}
+
+// Best pratice
+function createPhoneNumber(numbers) {
+  var format = "(xxx) xxx-xxxx";
+
+  for (var i = 0; i < numbers.length; i++) {
+    format = format.replace("x", numbers[i]);
+  }
+
+  return format;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write Number in Expanded Form
+  You will be given a number and you will need to return it as a string in Expanded Form. For example:
+
+  expandedForm(12); // Should return '10 + 2'
+  expandedForm(42); // Should return '40 + 2'
+  expandedForm(70304); // Should return '70000 + 300 + 4'
+  NOTE: All numbers will be whole numbers greater than 0.
+*/
+
+// My code
+function expandedForm(num) {
+  num = num.toString().split("");
+  let newArray = [];
+  while (num.length > 0) {
+    if (num[0] === "0") {
+      num.shift();
+    } else {
+      newArray.push(num[0] + "0".repeat(num.length - 1));
+      num.shift();
+    }
+  }
+  return newArray.join(" + ");
+}
+
+// Best pratice
+function expandedForm(num) {
+  return String(num)
+    .split("")
+    .map((num, index, arr) => num + "0".repeat(arr.length - index - 1))
+    .filter((num) => Number(num) != 0)
+    .join(" + ");
+}
+
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  In this kata you have to write a simple Morse code decoder. While the Morse code is now mostly superseded by voice and digital data communication channels, it still has its use in some applications around the world.
+  The Morse code encodes every character as a sequence of "dots" and "dashes". For example, the letter A is coded as ·−, letter Q is coded as −−·−, and digit 1 is coded as ·−−−−. The Morse code is case-insensitive, traditionally capital letters are used. When the message is written in Morse code, a single space is used to separate the character codes and 3 spaces are used to separate words. For example, the message HEY JUDE in Morse code is ···· · −·−−   ·−−− ··− −·· ·.
+
+  NOTE: Extra spaces before or after the code have no meaning and should be ignored.
+
+  In addition to letters, digits and some punctuation, there are some special service codes, the most notorious of those is the international distress signal SOS (that was first issued by Titanic), that is coded as ···−−−···. These special codes are treated as single special characters, and usually are transmitted as separate words.
+
+  Your task is to implement a function that would take the morse code as input and return a decoded human-readable string.
+
+  For example:
+
+  decodeMorse('.... . -.--   .--- ..- -.. .')
+  //should return "HEY JUDE"
+*/
+
+// My code
+// https://www.codewars.com/kata/54b724efac3d5402db00065e/train/javascript 
