@@ -1630,25 +1630,168 @@ function expandedForm(num) {
     .join(" + ");
 }
 
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Calculate the number of argument
+  Example : args_count(1, 2, 3) -> 3
+  args_count(1, 2, 3, 10) -> 4
+*/
+
+// My code
+const args_count = (...args) => {
+  let sum = 0;
+  for (let i = 0; i <= args.length; i++) sum = i;
+  return sum;
+};
+
+// Best pratices
+function args_count() {
+  return arguments.length;
+}
+
+const args_count = (...args) => args.length;
 
 /* --------------------------------------------------------------------------------------------------------------------------- */
 
 /*
   DESCRIPTION:
-  In this kata you have to write a simple Morse code decoder. While the Morse code is now mostly superseded by voice and digital data communication channels, it still has its use in some applications around the world.
-  The Morse code encodes every character as a sequence of "dots" and "dashes". For example, the letter A is coded as ·−, letter Q is coded as −−·−, and digit 1 is coded as ·−−−−. The Morse code is case-insensitive, traditionally capital letters are used. When the message is written in Morse code, a single space is used to separate the character codes and 3 spaces are used to separate words. For example, the message HEY JUDE in Morse code is ···· · −·−−   ·−−− ··− −·· ·.
+  For a given string s find the character c (or C) with longest consecutive repetition and return:
 
-  NOTE: Extra spaces before or after the code have no meaning and should be ignored.
+  [c, l]
+  where l (or L) is the length of the repetition. If there are two or more characters with the same l return the first in order of appearance.
 
-  In addition to letters, digits and some punctuation, there are some special service codes, the most notorious of those is the international distress signal SOS (that was first issued by Titanic), that is coded as ···−−−···. These special codes are treated as single special characters, and usually are transmitted as separate words.
+  For empty string return:
 
-  Your task is to implement a function that would take the morse code as input and return a decoded human-readable string.
+  ["", 0]
+  In JavaScript: If you use Array.sort in your solution, you might experience issues with the random tests as Array.sort is not stable in the Node.js version used by CodeWars. This is not a kata issue.
 
-  For example:
-
-  decodeMorse('.... . -.--   .--- ..- -.. .')
-  //should return "HEY JUDE"
+  Happy coding! :)
 */
 
 // My code
-// https://www.codewars.com/kata/54b724efac3d5402db00065e/train/javascript 
+function longestRepetition(s) {
+  let obj = {};
+  let letter = "";
+  let repetation = 0;
+
+  for (let letter of s) {
+    if (obj[letter]) {
+      obj[letter] += 1;
+    } else {
+      obj[letter] = 1;
+    }
+  }
+  for (let result in obj) {
+    if (repetation < obj[result]) {
+      console.log(result, obj[result]);
+      repetation = obj[result];
+      letter = result;
+    }
+  }
+  return [letter, repetation];
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
+
+  Examples:
+
+  spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" 
+  spinWords( "This is a test") => returns "This is a test" 
+  spinWords( "This is another test" )=> returns "This is rehtona test"
+*/
+
+// My code
+function spinWords(string) {
+  return string
+    .split(" ")
+    .map((word) =>
+      word.length >= 5 ? word.split("").reverse().join("") : word
+    )
+    .join(" ");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Well met with Fibonacci bigger brother, AKA Tribonacci.
+
+  As the name may already reveal, it works basically like a Fibonacci, but summing the last 3 (instead of 2) numbers of the sequence to generate the next. 
+
+  So, if we are to start our Tribonacci sequence with [1, 1, 1] as a starting input (AKA signature), we have this sequence:
+
+  [1, 1 ,1, 3, 5, 9, 17, 31, ...]
+  But what if we started with [0, 0, 1] as a signature? As starting with [0, 1] instead of [1, 1] basically shifts the common Fibonacci sequence by once place, you may be tempted to think that we would get the same sequence shifted by 2 places, but that is not the case and we would get:
+
+  [0, 0, 1, 1, 2, 4, 7, 13, 24, ...]
+  Well, you may have guessed it by now, but to be clear: you need to create a fibonacci function that given a signature array/list, returns the first n elements - signature included of the so seeded sequence.
+
+  Signature will always contain 3 numbers; n will always be a non-negative number; if n == 0, then return an empty array (except in C return NULL) and be ready for anything else which is not clearly specified ;)
+*/
+
+// My code
+function tribonacci(signature, n) {
+  var l = signature.splice(0, n);
+
+  for (var i = 3; i < n; i++) l.push(l[i - 3] + l[i - 2] + l[i - 1]);
+
+  return l;
+}
+
+// Best pratices
+function tribonacci(signature, n) {
+  for (var i = 0; i < n - 3; i++) {
+    // iterate n times
+    signature.push(signature[i] + signature[i + 1] + signature[i + 2]); // add last 3 array items and push to trib
+  }
+  return signature.slice(0, n); //return trib - length of n
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Complete the solution so that it splits the string into pairs of two characters. If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_').
+
+  Examples:
+
+  * 'abc' =>  ['ab', 'c_']
+  * 'abcdef' => ['ab', 'cd', 'ef']
+*/
+
+// My code
+function solution(str) {
+  str = str.split("");
+  let array = [];
+  while (str.length > 0) {
+    let odd = str[1] ? str[1] : "_";
+    let pair = str[0] + odd;
+    array.push(pair);
+    str.splice(0, 2);
+  }
+  return array;
+}
+
+// Best pratice
+function solution(s) {
+  return (s + "_").match(/.{2}/g) || [];
+}
+
+function solution(str) {
+  var i = 0;
+  var result = new Array();
+  if (str.length % 2 !== 0) {
+    str = str + "_";
+  }
+  while (i < str.length) {
+    result.push(str[i] + str[i + 1]);
+    i += 2;
+  }
+  return result;
+}
