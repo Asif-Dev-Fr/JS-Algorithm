@@ -1795,3 +1795,61 @@ function solution(str) {
   }
   return result;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Task:
+  Given a list of integers, determine whether the sum of its elements is odd or even.
+
+  Give your answer as a string matching "odd" or "even".
+
+  If the input array is empty consider it as: [0] (array with a zero).
+
+  Examples:
+  Input: [0]
+  Output: "even"
+
+  Input: [0, 1, 4]
+  Output: "odd"
+
+  Input: [0, -1, -5]
+  Output: "even"
+*/
+
+// My code
+function oddOrEven(array) {
+  return array.reduce((a, b) => a + b, 0) % 2 === 0 ? "even" : "odd";
+}
+
+// Best pratice
+function oddOrEven(arr) {
+  return arr.reduce((a, b) => a + b, 0) % 2 ? "odd" : "even";
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Clock shows h hours, m minutes and s seconds after midnight.
+
+  Your task is to write a function which returns the time since midnight in milliseconds.
+
+  Example:
+  h = 0
+  m = 1
+  s = 1
+
+  result = 61000
+*/
+
+// My code
+function past(h, m, s) {
+  return 1000 * (h * 60 * 60 + m * 60 + s);
+}
+
+// Best pratices
+function past(h, m, s) {
+  return (h * 3600 + m * 60 + s) * 1000;
+}
