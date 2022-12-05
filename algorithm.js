@@ -1947,3 +1947,92 @@ function longestConsec(strarr, k) {
 
   return longStr;
 }
+
+/**
+  問題1
+  下のコードで関数isSameArray1を呼び出している箇所が4箇所あります。
+  それぞれコメントで書いている値を返却する関数isSameArray1を完成させなさい。
+  ※ 修正できるのは関数isSameArray1の中だけです。
+  ※ 引数に入ってくる値は必ず[integer]です。
+  ※ Array.toString(), JSON.stringify()は使わないものとします。
+*/
+function isSameArray1(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+  let numberOfSameElement = 0;
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] === arr2[i]) {
+      numberOfSameElement++;
+    }
+  }
+  return (
+    numberOfSameElement === arr1.length && numberOfSameElement === arr2.length
+  );
+}
+
+// ここではtrueが返ってくる
+const a = [1, 2, 3, 4];
+const b = [1, 2, 3, 4];
+document.getElementById("answer1").innerHTML = `${isSameArray1(a, b)}`;
+
+// ここではfalseが返ってくる
+const c = [1, 1, 2, 2];
+const d = [1, 1, 2, 1];
+document.getElementById("answer2").innerHTML = `${isSameArray1(c, d)}`;
+
+// ここではfalseが返ってくる
+const e = [1, 2, 3, 4];
+const f = [1, 3, 2, 4];
+document.getElementById("answer3").innerHTML = `${isSameArray1(e, f)}`;
+
+// ここではfalseが返ってくる
+const g = [1, 2, 3, 4, 5, 6];
+const h = [1, 2, 3, 4, 5, 6, 7];
+document.getElementById("answer4").innerHTML = `${isSameArray1(g, h)}`;
+
+/**
+  問題2
+  下のコードで関数isSameArray2を呼び出している箇所が4箇所あります。
+  それぞれコメントで書いている値を返却する関数isSameArray2を完成させなさい。
+  ※ 修正できるのは関数isSameArray2の中だけです。
+  ※ 引数に入ってくる値は必ず[integer|array]です。
+  ※ 引数には任意の次元の配列が入ってくるものとする。
+  ※ JSON.stringify()は使わないものとする。
+*/
+function isSameArray2(arr1, arr2) {
+  let splitOne = arr1.toString().split("");
+  let splitTwo = arr2.toString().split("");
+ 
+}
+
+// ここではtrueが返ってくる
+const i = [1, 2, [3, 4, [5, [6]]]];
+const j = [1, 2, [3, 4, [5, [6]]]];
+document.getElementById("answer5").innerHTML = `${isSameArray2(i, j)}`;
+
+// ここではfalseが返ってくる
+const k = [
+  [1, 2],
+  [3, 4],
+  [5, [6]],
+];
+const l = [
+  [1, 2],
+  [3, 5],
+  [5, [6]],
+];
+document.getElementById("answer6").innerHTML = `${isSameArray2(k, l)}`;
+
+// ここではfalseが返ってくる
+const m = [1, 2, [3, 4, 5]];
+const n = [1, 2, [4, 4, 5]];
+document.getElementById("answer7").innerHTML = `${isSameArray2(m, n)}`;
+
+// ここではfalseが返ってくる
+const o = [1, 2, [3, 4, [5, 6]]];
+const p = [1, 2, [3, 4, 5, [6]]];
+document.getElementById("answer8").innerHTML = `${isSameArray2(o, p)}`;
+
+// ここではfalseが返ってくる
+const q = [1, 2, [3, 4, [5, [6]]]];
+const r = [1, 2, [4, 3, [5, [6]]]];
+document.getElementById("answer9").innerHTML = `${isSameArray2(q, r)}`;
