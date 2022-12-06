@@ -1948,6 +1948,8 @@ function longestConsec(strarr, k) {
   return longStr;
 }
 
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
 /**
   問題1
   下のコードで関数isSameArray1を呼び出している箇所が4箇所あります。
@@ -2001,7 +2003,6 @@ document.getElementById("answer4").innerHTML = `${isSameArray1(g, h)}`;
 function isSameArray2(arr1, arr2) {
   let splitOne = arr1.toString().split("");
   let splitTwo = arr2.toString().split("");
- 
 }
 
 // ここではtrueが返ってくる
@@ -2036,3 +2037,78 @@ document.getElementById("answer8").innerHTML = `${isSameArray2(o, p)}`;
 const q = [1, 2, [3, 4, [5, [6]]]];
 const r = [1, 2, [4, 3, [5, [6]]]];
 document.getElementById("answer9").innerHTML = `${isSameArray2(q, r)}`;
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
+
+  Examples input/output:
+
+  XO("ooxx") => true
+  XO("xooxx") => false
+  XO("ooxXm") => true
+  XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+  XO("zzoo") => false
+*/
+
+// My code
+function XO(str) {
+  let x = 0;
+  let o = 0;
+  for (let el of str.toLowerCase()) {
+    if (el === "x") {
+      x++;
+    } else if (el === "o") {
+      o++;
+    }
+  }
+  return x === o;
+}
+
+// Best pratices
+const XO = (str) => {
+  str = str.toLowerCase().split("");
+  return (
+    str.filter((x) => x === "x").length === str.filter((x) => x === "o").length
+  );
+};
+
+function XO(str) {
+  let x = str.match(/x/gi);
+  let o = str.match(/o/gi);
+  return (x && x.length) === (o && o.length);
+}
+
+function XO(str) {
+  return (
+    str.toLowerCase().split("x").length === str.toLowerCase().split("o").length
+  );
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Complete the function that accepts a string parameter, and reverses each word in the string. All spaces in the string should be retained.
+
+  Examples
+  "This is an example!" ==> "sihT si na !elpmaxe"
+  "double  spaces"      ==> "elbuod  secaps"
+*/
+
+// My code
+function reverseWords(str) {
+  return str
+    .split(" ")
+    .map((word) => word.split("").reverse().join(""))
+    .join(" ");
+}
+
+// Alternative
+function reverseWords(str) {
+  // Go for it
+  //split words into seperate arrays
+  return str.split("").reverse().join("").split(" ").reverse().join(" ");
+}
