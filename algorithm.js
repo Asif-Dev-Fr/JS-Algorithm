@@ -2244,6 +2244,7 @@ function solution(string) {
   * Input: [2,2,1,2,1], output = [2,2,2,1]
 */
 
+// My code
 function removeSmallest(numbers) {
   const duplicate = numbers;
   let smallestValue = numbers.indexOf(Math.min(...numbers));
@@ -2254,3 +2255,73 @@ function removeSmallest(numbers) {
 // Best pratices
 const removeSmallest = (numbers) =>
   numbers.filter((n, i) => i !== numbers.indexOf(Math.min(...numbers)));
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  The main idea is to count all the occurring characters in a string. If you have a string like aba, then the result should be {'a': 2, 'b': 1}.
+
+  What if the string is empty? Then the result should be empty object literal, {}.
+*/
+
+// My code
+function count(string) {
+  if (string.length === 0) return {};
+  else {
+    let obj = {};
+    for (let letter of string) {
+      if (obj[letter]) {
+        obj[letter]++;
+      } else {
+        obj[letter] = 1;
+      }
+    }
+    return obj;
+  }
+}
+
+// Best pratices
+function count(string) {
+  var count = {};
+  string.split("").forEach((s) => {
+    count[s] ? count[s]++ : (count[s] = 1);
+  });
+  return count;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Your job is to write a function which increments a string, to create a new string.
+
+  If the string already ends with a number, the number should be incremented by 1.
+  If the string does not end with a number. the number 1 should be appended to the new string.
+  Examples:
+
+  foo -> foo1
+
+  foobar23 -> foobar24
+
+  foo0042 -> foo0043
+
+  foo9 -> foo10
+
+  foo099 -> foo100
+*/
+
+// My code
+function incrementString(strng) {
+  const duplicate = strng.slice(0, -1);
+  const lastEl = strng.slice(-1).match(/[0-9]/);
+  return lastEl === null
+    ? strng + "1"
+    : lastEl != 9
+    ? duplicate + (+lastEl + 1)
+    : incrementString(duplicate) + "0";
+}
+
+// Best pratices
+let incrementString = (str) =>
+  str.replace(/([0-8]|\d?9+)?$/, (e) => (e ? +e + 1 : 1));
