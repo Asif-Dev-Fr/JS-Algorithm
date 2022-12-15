@@ -2351,3 +2351,128 @@ function twoSum(numbers, target) {
     }
   }
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Your team is writing a fancy new text editor and you've been tasked with implementing the line numbering.
+
+  Write a function which takes a list of strings and returns each line prepended by the correct number.
+
+  The numbering starts at 1. The format is n: string. Notice the colon and space in between.
+
+  Examples: (Input --> Output)
+
+  [] --> []
+  ["a", "b", "c"] --> ["1: a", "2: b", "3: c"]
+*/
+
+// My code
+var number = function (array) {
+  return array.map((el, k) => {
+    return k + 1 + ": " + el;
+  });
+};
+
+// Best pratices
+let number = (a) => a.map((v, i) => `${i + 1}: ${v}`);
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a simple parser that will parse and run Deadfish.
+
+  Deadfish has 4 commands, each 1 character long:
+
+  i increments the value (initially 0)
+  d decrements the value
+  s squares the value
+  o outputs the value into the return array
+  Invalid characters should be ignored.
+
+  parse("iiisdoso") => [ 8, 64 ]
+*/
+
+// My code
+// Return the output array, and ignore all non-op characters
+const parse = (data) => {
+  let result = [];
+  let firstEl = 0;
+  for (let l of data) {
+    if (l === "i") {
+      firstEl++;
+    } else if (l === "d") {
+      firstEl--;
+    } else if (l === "s") {
+      firstEl = firstEl * firstEl;
+    } else if (l === "o") {
+      result.push(firstEl);
+    }
+  }
+  return result;
+};
+
+// Alternatives
+function parse(data) {
+  var v = 0,
+    ret = [];
+  for (var c of data) {
+    switch (c) {
+      case "i":
+        v++;
+        break;
+      case "d":
+        v--;
+        break;
+      case "s":
+        v = v * v;
+        break;
+      case "o":
+        ret.push(v);
+        break;
+    }
+  }
+  return ret;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Given a string, capitalize the letters that occupy even indexes and odd indexes separately, and return as shown below. Index 0 will be considered even.
+
+  For example, capitalize("abcdef") = ['AbCdEf', 'aBcDeF']. See test cases for more examples.
+
+  The input will be a lowercase string with no spaces.
+*/
+
+// My code
+function capitalize(s) {
+  let evenArray = [];
+  let oddArray = [];
+  for (let [key, value] of Object.entries(s)) {
+    if (key % 2 === 0) {
+      evenArray.push(value.toUpperCase());
+      oddArray.push(value);
+    } else {
+      oddArray.push(value.toUpperCase());
+      evenArray.push(value);
+    }
+  }
+  return [evenArray.join(""), oddArray.join("")];
+}
+
+// Best pratices
+function capitalize(s) {
+  const odd = s
+    .split("")
+    .map((l, i) => (i % 2 !== 0 ? l.toUpperCase() : l))
+    .join("");
+  const even = s
+    .split("")
+    .map((l, i) => (i % 2 === 0 ? l.toUpperCase() : l))
+    .join("");
+  return [even, odd];
+}
