@@ -2559,3 +2559,68 @@ function toWeirdCase(string) {
     })
     .join(" ");
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Your task, is to create NxN multiplication table, of size provided in parameter.
+
+  for example, when given size is 3:
+
+  1 2 3
+  2 4 6
+  3 6 9
+  for given example, the return value should be: [[1,2,3],[2,4,6],[3,6,9]]
+*/
+
+// My code
+multiplicationTable = function (size) {
+  var result = [];
+
+  for (var i = 0; i < size; i++) {
+    result[i] = [];
+    for (var j = 0; j < size; j++) {
+      result[i][j] = (i + 1) * (j + 1);
+    }
+  }
+
+  return result;
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  You have to sort the inner content of every word of a string in descending order.
+
+  The inner content is the content of a word without first and the last char.
+
+  Some examples:
+
+  "sort the inner content in descending order"  -->  "srot the inner ctonnet in dsnnieedcg oredr"
+  "wait for me"        -->  "wiat for me"
+  "this kata is easy"  -->  "tihs ktaa is esay"
+  Words are made up of lowercase letters.
+*/
+
+// My code
+const sortTheInnerContent = (words) => {
+  return words
+    .split(" ")
+    .map((word) => {
+      let letters = word.split("");
+      let a = letters.shift();
+      let b = letters.pop() || "";
+      let order = letters.sort().reverse().join("") || "";
+      return word.length > 3 ? a + order + b : word;
+    })
+    .join(" ");
+};
+
+// Best pratices
+function sortTheInnerContent(words) {
+  return words.replace(/\B\w+(?=\w)/g, function (match) {
+    return match.split("").sort().reverse().join("");
+  });
+}
