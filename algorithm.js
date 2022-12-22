@@ -2755,4 +2755,59 @@ function getDivisorsCnt(n) {
 */
 
 // My code
-// https://www.codewars.com/kata/569d488d61b812a0f7000015/train/javascript
+function dataReverse(data) {
+  const chunk = [];
+  for (let i = 0; i < data.length; i += 8) {
+    chunk.unshift(...data.slice(i, i + 8));
+  }
+  return chunk;
+}
+
+// Alternantives
+const dataReverse = (data) => {
+  const result = [];
+  while (data.length) {
+    result.push(...data.splice(-8));
+  }
+  return result;
+};
+
+function dataReverse(data) {
+  let a = [];
+  while (data.length) a.unshift(...data.splice(data.length - 8, data.length));
+  return a;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Complete the method which returns the number which is most frequent in the given input array. If there is a tie for most frequent number, return the largest number among them.
+
+  Note: no empty arrays will be given.
+
+  Examples
+  [12, 10, 8, 12, 7, 6, 4, 10, 12]              -->  12
+  [12, 10, 8, 12, 7, 6, 4, 10, 12, 10]          -->  12
+  [12, 10, 8, 8, 3, 3, 3, 3, 2, 4, 10, 12, 10]  -->   3
+*/
+function highestRank(arr) {
+  let obj = {};
+  for (let n of arr) {
+    if (obj[n]) {
+      obj[n]++;
+    } else {
+      obj[n] = 1;
+    }
+  }
+  let highestNumber = 0;
+  let count = 0;
+  for (let n in obj) {
+    console.log("property:", n, "value:", obj[n]);
+    if (count < obj[n] || (count === obj[n] && highestNumber < parseInt(n))) {
+      count = obj[n];
+      highestNumber = parseInt(n);
+    }
+  }
+  return highestNumber;
+}
