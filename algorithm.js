@@ -117,7 +117,7 @@ function openOrSenior(data) {
   return newArray;
 }
 
-// Best function
+// Alternative
 function openOrSenior(data) {
   return data.map(([age, handicap]) =>
     age > 54 && handicap > 7 ? "Senior" : "Open"
@@ -137,7 +137,7 @@ function booleanToString(b) {
   return b === true ? "true" : "false";
 }
 
-// Best solution :
+// Alternative
 function booleanToString(b) {
   return b.toString();
 }
@@ -175,7 +175,7 @@ function printerError(s) {
   return error + "/" + maxLength;
 }
 
-// Best pratice
+// Alternative
 function printerError(s) {
   // your code
   var count = 0;
@@ -272,7 +272,7 @@ function josephusSurvivor(n, k) {
   return people[0];
 }
 
-// Best pratice
+// Alternative
 function josephusSurvivor(n, k) {
   return n < 1 ? 1 : ((josephusSurvivor(n - 1, k) + --k) % n) + 1;
 }
@@ -343,7 +343,7 @@ function duplicateEncode(word) {
   return result;
 }
 
-// Best pratice
+// Alternative
 function duplicateEncode(word) {
   return word
     .toLowerCase()
@@ -387,7 +387,7 @@ function getSum(a, b) {
   }
 }
 
-// Best pratice
+// Alternative
 const GetSum = (a, b) => {
   let min = Math.min(a, b);
   let max = Math.max(a, b);
@@ -419,7 +419,7 @@ function isIsogram(str) {
   return counter === 0 ? true : false;
 }
 
-// Best pratice
+// Alternative
 function isIsogram(str) {
   return new Set(str.toUpperCase()).size == str.length;
 }
@@ -481,7 +481,7 @@ function maskify(cc) {
   } else return split.join("");
 }
 
-// Best pratice
+// Alternative
 function maskify(cc) {
   return cc.slice(0, -4).replace(/./g, "#") + cc.slice(-4);
 }
@@ -509,7 +509,7 @@ var summation = function (num) {
   return sum;
 };
 
-// Best pratices
+// Alternative
 const summation = (n) => (n * (n + 1)) / 2;
 
 /* --------------------------------------------------------------------------------------------------------------------------- */
@@ -532,7 +532,7 @@ function validatePIN(pin) {
   return fourDigits || sixDigits === true ? true : false;
 }
 
-// Best pratices
+// Alternative
 function validatePIN(pin) {
   return /^(\d{4}|\d{6})$/.test(pin);
 }
@@ -590,7 +590,7 @@ function pairOfShoes(shoes) {
   return false;
 }
 
-// Best practice
+// Alternative
 const pairOfShoes = (shoes) =>
   Object.values(
     shoes.reduce(
@@ -619,7 +619,7 @@ function areYouPlayingBanjo(name) {
   else return name + " does not play banjo";
 }
 
-// Best practice
+// Alternative
 function areYouPlayingBanjo(name) {
   return (
     name +
@@ -646,7 +646,7 @@ function descendingOrder(n) {
   return parseInt(n.toString().split("").sort().reverse().join(""));
 }
 
-// Best pratice
+// Alternative
 function descendingOrder(n) {
   return parseInt(String(n).split("").sort().reverse().join(""));
 }
@@ -680,7 +680,7 @@ function countSheeps(arrayOfSheep) {
   return count;
 }
 
-// Best pratices
+// Alternative
 function countSheeps(arrayOfSheeps) {
   return arrayOfSheeps.filter(Boolean).length;
 }
@@ -715,7 +715,7 @@ var number = function (busStops) {
   return peopleIn - peopleOut;
 };
 
-// Best pratice
+// Alternative
 var number = function (busStops) {
   var totalPeople = 0;
   for (var i = 0; i < busStops.length; i++) {
@@ -752,7 +752,7 @@ const rps = (p1, p2) => {
   else if (p2 === "paper" && p1 === "rock") return p2Won;
 };
 
-// Best pratice
+// Alternative
 function rps(p1, p2) {
   if (p1 === p2) return "Draw!";
   var rules = { rock: "scissors", paper: "rock", scissors: "paper" };
@@ -827,7 +827,7 @@ function disemvowel(str) {
     .join(" "));
 }
 
-// Best pratice
+// Alternative
 function disemvowel(str) {
   return str.replace(/[aeiou]/gi, "");
 }
@@ -863,7 +863,7 @@ function minMax(arr) {
   return [arr[0], arr[arr.length - 1]];
 }
 
-// Best pratice
+// Alternative
 function minMax(arr) {
   return [Math.min(...arr), Math.max(...arr)];
 }
@@ -887,7 +887,7 @@ function solution(nums) {
     : nums.sort((a, b) => a - b);
 }
 
-// Best pratice
+// Alternative
 function solution(nums) {
   return nums !== null
     ? nums.sort(function (a, b) {
@@ -1034,7 +1034,7 @@ function rentalCarCost(d) {
   return costTotal;
 }
 
-// Best pratice
+// Alternative
 function baseCost(days, rate) {
   return days * rate;
 }
@@ -1095,7 +1095,7 @@ function feast(beast, dish) {
   );
 }
 
-// Best practice
+// Alternative
 function feast(beast, dish) {
   return (
     beast[0] === dish[0] && beast[beast.length - 1] === dish[dish.length - 1]
@@ -1151,7 +1151,7 @@ function friend(friends) {
   return newArray;
 }
 
-// Best pratices
+// Alternative
 function friend(friends) {
   return friends.filter((n) => n.length === 4);
 }
@@ -1221,7 +1221,7 @@ function towerBuilder(nFloors) {
   return array;
 }
 
-// Best pratice
+// Alternative
 function towerBuilder(n) {
   return Array.from({ length: n }, function (v, k) {
     const spaces = " ".repeat(n - k - 1);
@@ -1308,7 +1308,7 @@ function getMiddle(s) {
   }
 }
 
-// Best pratice
+// Alternative
 function getMiddle(s) {
   var middle = s.length / 2;
   return s.length % 2
@@ -1342,7 +1342,7 @@ function persistence(num) {
   return persistentNumber;
 }
 
-// Best pratices
+// Alternative
 function persistence(num) {
   var times = 0;
 
@@ -1399,7 +1399,7 @@ function duplicateCount(text) {
   }
 }
 
-// Best pratices
+// Alternative
 function duplicateCount(text) {
   return (
     text
@@ -1468,7 +1468,7 @@ function findUniq(arr) {
   return single % 1 === 0 ? parseInt(single) : parseFloat(single);
 }
 
-// Best pratice
+// Alternative
 function findUniq(arr) {
   arr.sort((a, b) => a - b);
   return arr[0] == arr[1] ? arr.pop() : arr[0];
@@ -1506,7 +1506,7 @@ function sum(numbers) {
   else return numbers.reduce((a, b) => a + b);
 }
 
-// Best pratice
+// Alternative
 function sum(numbers) {
   return numbers.reduce((a, b) => a + b, 0);
 }
@@ -1582,7 +1582,7 @@ function createPhoneNumber(numbers) {
   return phoneNumber;
 }
 
-// Best pratice
+// Alternative
 function createPhoneNumber(numbers) {
   var format = "(xxx) xxx-xxxx";
 
@@ -1621,7 +1621,7 @@ function expandedForm(num) {
   return newArray.join(" + ");
 }
 
-// Best pratice
+// Alternative
 function expandedForm(num) {
   return String(num)
     .split("")
@@ -1646,7 +1646,7 @@ const args_count = (...args) => {
   return sum;
 };
 
-// Best pratices
+// Alternative
 function args_count() {
   return arguments.length;
 }
@@ -1744,7 +1744,7 @@ function tribonacci(signature, n) {
   return l;
 }
 
-// Best pratices
+// Alternative
 function tribonacci(signature, n) {
   for (var i = 0; i < n - 3; i++) {
     // iterate n times
@@ -1778,7 +1778,7 @@ function solution(str) {
   return array;
 }
 
-// Best pratice
+// Alternative
 function solution(s) {
   return (s + "_").match(/.{2}/g) || [];
 }
@@ -1823,7 +1823,7 @@ function oddOrEven(array) {
   return array.reduce((a, b) => a + b, 0) % 2 === 0 ? "even" : "odd";
 }
 
-// Best pratice
+// Alternative
 function oddOrEven(arr) {
   return arr.reduce((a, b) => a + b, 0) % 2 ? "odd" : "even";
 }
@@ -1849,7 +1849,7 @@ function past(h, m, s) {
   return 1000 * (h * 60 * 60 + m * 60 + s);
 }
 
-// Best pratices
+// Alternative
 function past(h, m, s) {
   return (h * 3600 + m * 60 + s) * 1000;
 }
@@ -2067,7 +2067,7 @@ function XO(str) {
   return x === o;
 }
 
-// Best pratices
+// Alternative
 const XO = (str) => {
   str = str.toLowerCase().split("");
   return (
@@ -2188,7 +2188,7 @@ function high(x) {
   return best;
 }
 
-// Best pratices
+// Alternative
 function high(s) {
   let as = s
     .split(" ")
@@ -2252,7 +2252,7 @@ function removeSmallest(numbers) {
   return duplicate;
 }
 
-// Best pratices
+// Alternative
 const removeSmallest = (numbers) =>
   numbers.filter((n, i) => i !== numbers.indexOf(Math.min(...numbers)));
 
@@ -2281,7 +2281,7 @@ function count(string) {
   }
 }
 
-// Best pratices
+// Alternative
 function count(string) {
   var count = {};
   string.split("").forEach((s) => {
@@ -2322,7 +2322,7 @@ function incrementString(strng) {
     : incrementString(duplicate) + "0";
 }
 
-// Best pratices
+// Alternative
 let incrementString = (str) =>
   str.replace(/([0-8]|\d?9+)?$/, (e) => (e ? +e + 1 : 1));
 
@@ -2375,7 +2375,7 @@ var number = function (array) {
   });
 };
 
-// Best pratices
+// Alternative
 let number = (a) => a.map((v, i) => `${i + 1}: ${v}`);
 
 /* --------------------------------------------------------------------------------------------------------------------------- */
@@ -2464,7 +2464,7 @@ function capitalize(s) {
   return [evenArray.join(""), oddArray.join("")];
 }
 
-// Best pratices
+// Alternative
 function capitalize(s) {
   const odd = s
     .split("")
@@ -2504,7 +2504,7 @@ const dontGiveMeFive = (start, end) => {
   return result;
 };
 
-// Best pratices
+// Alternative
 function dontGiveMeFive(start, end) {
   let count = 0;
   for (let i = start; i <= end; i++) {
@@ -2618,7 +2618,7 @@ const sortTheInnerContent = (words) => {
     .join(" ");
 };
 
-// Best pratices
+// Alternative
 function sortTheInnerContent(words) {
   return words.replace(/\B\w+(?=\w)/g, function (match) {
     return match.split("").sort().reverse().join("");
@@ -2673,7 +2673,7 @@ function likes(names) {
   }
 }
 
-// Best pratices
+// Alternative
 function likes(names) {
   names = names || [];
   switch (names.length) {
@@ -2791,6 +2791,8 @@ function dataReverse(data) {
   [12, 10, 8, 12, 7, 6, 4, 10, 12, 10]          -->  12
   [12, 10, 8, 8, 3, 3, 3, 3, 2, 4, 10, 12, 10]  -->   3
 */
+
+// My code
 function highestRank(arr) {
   let obj = {};
   for (let n of arr) {
@@ -2810,4 +2812,87 @@ function highestRank(arr) {
     }
   }
   return highestNumber;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Introduction
+  You need to write a function that will format a phone number by a template.
+
+  Task
+  You're given number and string.
+
+  If there are more digits than needed, they should be ignored
+
+  if there are less digits than needed, should return Invalid phone number
+
+  Examples
+  (79052479075, "+# ### ### ## ##") => "+7 905 247 90 75"
+  (79052479075, "+# (###) ### ##-##") => "+7 (905) 247 90-75"
+  (79052479075, "+# ### ### ## ##") => "+7 905 247 90 75"
+  (81237068908090, "+## ### ### ## ##") => "+81 237 068 90 80"
+  (8123706890, "+## ### ### ##-##") => "Invalid phone number"
+  (911, "###") => "911"
+  (112, "+ () -") => "+ () -"
+*/
+
+// My code
+function formatNumber(number, template) {
+  let arrayNumber = number.toString().split("");
+  for (let n of arrayNumber) {
+    template = template.replace("#", n);
+  }
+  return /[#]/g.test(template) ? "Invalid phone number" : template;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+*/
+
+// My code
+function evenOrOdd(number) {
+  return number % 2 === 0 ? "Even" : "Odd";
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  This time no story, no theory. The examples below show you how to write function accum:
+
+  Examples:
+  accum("abcd") -> "A-Bb-Ccc-Dddd"
+  accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+  accum("cwAt") -> "C-Ww-Aaa-Tttt"
+  The parameter of accum is a string which includes only letters from a..z and A..Z.
+*/
+
+// My code
+function accum(s) {
+  let newArray = [];
+  for (let i = 0; i < s.length; i++) {
+    if (i === 0) {
+      newArray.push(s[i].toUpperCase() + "-");
+    } else if (i === s.length - 1) {
+      let data = s[i].toUpperCase() + s[i].repeat(i).toLowerCase();
+      newArray.push(data);
+    } else {
+      let data = s[i].toUpperCase() + s[i].repeat(i).toLowerCase() + "-";
+      newArray.push(data);
+    }
+  }
+  return newArray.join("");
+}
+
+// Alternative
+function accum(s) {
+  return s
+    .split("")
+    .map((c, i) => c.toUpperCase() + c.toLowerCase().repeat(i))
+    .join("-");
 }
