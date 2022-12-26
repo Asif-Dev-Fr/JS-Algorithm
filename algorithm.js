@@ -2896,3 +2896,54 @@ function accum(s) {
     .map((c, i) => c.toUpperCase() + c.toLowerCase().repeat(i))
     .join("-");
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  It's pretty straightforward. Your goal is to create a function that removes the first and last characters of a string. You're given one parameter, the original string. You don't have to worry with strings with less than two characters.
+*/
+
+// My code
+function removeChar(str) {
+  let word = str.split("");
+  word.shift();
+  word.pop();
+  return word.join("");
+}
+
+// Alternative
+function removeChar(str) {
+  return str.slice(1, -1);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Remove the parentheses
+  In this kata you are given a string for example:
+
+  "example(unwanted thing)example"
+  Your task is to remove everything inside the parentheses as well as the parentheses themselves.
+
+  The example above would return:
+
+  "exampleexample"
+  Notes
+  Other than parentheses only letters and spaces can occur in the string. Don't worry about other brackets like "[]" and "{}" as these will never appear.
+  There can be multiple parentheses.
+  The parentheses can be nested.
+*/
+
+// My code
+function removeParentheses(s) {
+  let result = "";
+  let count = 0;
+  for (let letter of s) {
+    if (letter == "(") count += 1;
+    if (count == 0) result += letter;
+    if (letter == ")") count -= 1;
+  }
+  return result;
+}
