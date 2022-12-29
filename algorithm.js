@@ -3056,3 +3056,123 @@ function nbYear(p0, percent, aug, p) {
   }
   return count;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Is the string uppercase?
+  Task
+  Create a method to see whether the string is ALL CAPS.
+
+  Examples (input -> output)
+  "c" -> False
+  "C" -> True
+  "hello I AM DONALD" -> False
+  "HELLO I AM DONALD" -> True
+  "ACSKLDFJSgSKLDFJSKLDFJ" -> False
+  "ACSKLDFJSGSKLDFJSKLDFJ" -> True
+*/
+
+// My code
+String.prototype.isUpperCase = function () {
+  let count = 0;
+  for (let l of this.split("")) {
+    if (l.match(/[a-z]/g)) {
+      count++;
+    }
+  }
+  return count !== 0 ? false : true;
+};
+
+// Alternative
+String.prototype.isUpperCase = function () {
+  return this == this.toUpperCase();
+};
+
+String.prototype.isUpperCase = function () {
+  return !/[a-z]/.test(this);
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write a function which calculates the average of the numbers in a given list.
+
+  Note: Empty arrays should return 0.
+*/
+
+// My code
+function findAverage(array) {
+  if (array.length === 0) return 0;
+  else {
+    return (
+      array.reduce((a, b) => {
+        return a + b;
+      }) / array.length
+    );
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Find the missing letter
+  Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
+
+  You will always get an valid array. And it will be always exactly one letter be missing. The length of the array will always be at least 2.
+  The array will always contain letters in only one case.
+
+  Example:
+
+  ['a','b','c','d','f'] -> 'e'
+  ['O','Q','R','S'] -> 'P'
+  (Use the English alphabet with 26 letters!)
+*/
+
+// My code
+function findMissingLetter(array) {
+  let alphabet = "abcdefghijklmnopqrstuvwxyz";
+  let lastLetter = "";
+  let index = alphabet.indexOf(array[0].toLowerCase());
+  for (let i = 0; i < array.length; i++) {
+    if (alphabet[index + i] !== array[i].toLowerCase()) {
+      lastLetter = alphabet[index + i];
+      break;
+    }
+  }
+  return /[a-z]/.test(array) ? lastLetter : lastLetter.toUpperCase();
+}
+
+function findMissingLetter(array) {
+  let alphabet = "abcdefghijklmnopqrstuvwxyz";
+  let index = alphabet.indexOf(array[0].toLowerCase());
+  for (let i = 0; i < array.length; i++) {
+    if (alphabet[index + i] !== array[i].toLowerCase()) {
+      return /[a-z]/.test(array)
+        ? alphabet[index + i]
+        : alphabet[index + i].toUpperCase();
+    }
+  }
+}
+
+function findMissingLetter(array) {
+  let first = array[0].charCodeAt(0);
+  for (let i = 1; i < array.length; i++) {
+    if (first + i !== array[i].charCodeAt(0)) {
+      return String.fromCharCode(first + i);
+    }
+  }
+  throw new Error("Invalid input");
+}
+
+// Alternative
+const findMissingLetter = (array) => {
+  const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const start = alphabet.indexOf(array[0]);
+  return alphabet
+    .slice(start, start + array.length)
+    .find((el) => !array.includes(el));
+};
