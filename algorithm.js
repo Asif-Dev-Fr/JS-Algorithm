@@ -3261,3 +3261,122 @@ function generateHashtag(str) {
       .join("");
   return r.length > 140 ? false : r;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Given an array of integers, find the one that appears an odd number of times.
+
+  There will always be only one integer that appears an odd number of times.
+
+  Examples
+  [7] should return 7, because it occurs 1 time (which is odd).
+  [0] should return 0, because it occurs 1 time (which is odd).
+  [1,1,2] should return 2, because it occurs 1 time (which is odd).
+  [0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
+  [1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
+*/
+
+// My code
+function findOdd(A) {
+  let obj = {};
+
+  for (let number of A) {
+    if (obj[number]) {
+      obj[number]++;
+    } else {
+      obj[number] = 1;
+    }
+  }
+  for (let n in obj) {
+    if (obj[n] % 2 !== 0) {
+      return parseInt(n);
+    }
+  }
+}
+
+// Alternative
+const findOdd = (xs) => xs.reduce((a, b) => a ^ b);
+
+function findOdd(A) {
+  var obj = {};
+  A.forEach(function (el) {
+    obj[el] ? obj[el]++ : (obj[el] = 1);
+  });
+
+  for (prop in obj) {
+    if (obj[prop] % 2 !== 0) return Number(prop);
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Take 2 strings s1 and s2 including only letters from a to z. Return a new sorted string, the longest possible, containing distinct letters - each taken only once - coming from s1 or s2.
+
+  Examples:
+  a = "xyaabbbccccdefww"
+  b = "xxxxyyyyabklmopq"
+  longest(a, b) -> "abcdefklmopqwxy"
+
+  a = "abcdefghijklmnopqrstuvwxyz"
+  longest(a, a) -> "abcdefghijklmnopqrstuvwxyz"
+*/
+
+// My code
+function longest(s1, s2) {
+  s1 = s1 + s2;
+  let newArray = [];
+  s1.split("")
+    .sort()
+    .map((l) => (!newArray.includes(l) ? newArray.push(l) : ""));
+  return newArray.join("");
+}
+
+// Alternative
+const longest = (s1, s2) => [...new Set(s1 + s2)].sort().join("");
+
+function longest(s1, s2) {
+  return Array.from(new Set(s1 + s2))
+    .sort()
+    .join("");
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Create a function that takes 2 integers in form of a string as an input, and outputs the sum (also as a string):
+
+  Example: (Input1, Input2 -->Output)
+
+  "4",  "5" --> "9"
+  "34", "5" --> "39"
+  "", "" --> "0"
+  "2", "" --> "2"
+  "-5", "3" --> "-2"
+  Notes:
+
+  If either input is an empty string, consider it as zero.
+
+  Inputs and the expected output will never exceed the signed 32-bit integer limit (2^31 - 1)
+*/
+
+// My code
+function sumStr(a, b) {
+  let sum = Number(a) + Number(b);
+  return sum.toString();
+}
+
+// Alternatives
+function sumStr(a, b) {
+  return String(Number(a) + Number(b));
+}
+
+function sumStr(a, b) {
+  return +a + +b + "";
+}
+// Coding +'' after an integer turns it into a string. This integer is the sum of two integers; each of which got converted from their string by the use of the + in front of them.
+
