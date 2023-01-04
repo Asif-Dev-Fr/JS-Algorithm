@@ -3436,3 +3436,116 @@ const doubleChar = (str) => {
 function doubleChar(str) {
   return str.replace(/(.)/g, "$1$1");
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  You get an array of numbers, return the sum of all of the positives ones.
+
+  Example [1,-4,7,12] => 1 + 7 + 12 = 20
+
+  Note: if there is nothing to sum, the sum is default to 0.
+*/
+
+// My code
+function positiveSum(arr) {
+  let sum = 0;
+  for (let n of arr) {
+    if (n > 0) sum = sum + n;
+  }
+  return sum;
+}
+
+// Alternative
+function positiveSum(arr) {
+  return arr.reduce((a, b) => a + (b > 0 ? b : 0), 0);
+}
+
+function positiveSum(arr) {
+  return arr.filter((x) => x >= 0).reduce((a, c) => a + c, 0);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Jaden Smith, the son of Will Smith, is the star of films such as The Karate Kid (2010) and After Earth (2013). Jaden is also known for some of his philosophy that he delivers via Twitter. When writing on Twitter, he is known for almost always capitalizing every word. For simplicity, you'll have to capitalize each word, check out how contractions are expected to be in the example below.
+
+  Your task is to convert strings to how they would be written by Jaden Smith. The strings are actual quotes from Jaden Smith, but they are not capitalized in the same way he originally typed them.
+
+  Example:
+
+  Not Jaden-Cased: "How can mirrors be real if our eyes aren't real"
+  Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real"
+*/
+
+// My code
+String.prototype.toJadenCase = function () {
+  return this.split(" ")
+    .map((el) => {
+      return el[0].toUpperCase() + el.slice(1);
+    })
+    .join(" ");
+};
+
+// Alternative
+String.prototype.toJadenCase = function () {
+  return this.split(" ")
+    .map(function (word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+
+  moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+*/
+
+// My code
+function moveZeros(arr) {
+  let numZeros = 0;
+  let arr2 = [];
+
+  for (let n of arr) {
+    if (n === 0) {
+      numZeros++;
+    } else {
+      arr2.push(n);
+    }
+  }
+
+  while (numZeros !== 0) {
+    arr2.push(0);
+    numZeros--;
+  }
+  return arr2;
+}
+
+// Alternative
+var moveZeros = function (arr) {
+  return arr
+    .filter(function (x) {
+      return x !== 0;
+    })
+    .concat(
+      arr.filter(function (x) {
+        return x === 0;
+      })
+    );
+};
+
+var moveZeros = function (arr) {
+  var filtedList = arr.filter(function (num) {
+    return num !== 0;
+  });
+  var zeroList = arr.filter(function (num) {
+    return num === 0;
+  });
+  return filtedList.concat(zeroList);
+};
