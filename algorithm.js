@@ -3549,3 +3549,100 @@ var moveZeros = function (arr) {
   });
   return filtedList.concat(zeroList);
 };
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Write function bmi that calculates body mass index (bmi = weight / height2).
+
+  if bmi <= 18.5 return "Underweight"
+
+  if bmi <= 25.0 return "Normal"
+
+  if bmi <= 30.0 return "Overweight"
+
+  if bmi > 30 return "Obese"
+*/
+
+// My code
+function bmi(weight, height) {
+  const bmi = weight / (height * height);
+  if (bmi <= 18.5) {
+    return "Underweight";
+  } else if (bmi <= 25) {
+    return "Normal";
+  } else if (bmi <= 30) {
+    return "Overweight";
+  } else if (bmi > 30) {
+    return "Obese";
+  }
+}
+
+// Alternative
+function bmi(weight, height) {
+  var bmi = weight / (height * height);
+
+  return bmi < 18.5
+    ? "Underweight"
+    : bmi <= 25
+    ? "Normal"
+    : bmi <= 30
+    ? "Overweight"
+    : "Obese";
+}
+
+function bmi(weight, height) {
+  let formula = weight / Math.pow(height, 2);
+  switch (formula !== 0) {
+    case formula <= 18.5:
+      return "Underweight";
+    case formula <= 25.0:
+      return "Normal";
+    case formula <= 30:
+      return "Overweight";
+    default:
+      return "Obese";
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Given an unsorted array of integers, find the smallest number in the array, the largest number in the array, and the smallest number between the two array bounds that is not in the array.
+
+  For instance, given the array [-1, 4, 5, -23, 24], the smallest number is -23, the largest number is 24, and the smallest number between the array bounds is -22. You may assume the input is well-formed.
+
+  You solution should return an array [smallest, minimumAbsent, largest]
+
+  The smallest integer should be the integer from the array with the lowest value.
+
+  The largest integer should be the integer from the array with the highest value.
+
+  The minimumAbsent is the smallest number between the largest and the smallest number that is not in the array.
+
+  minMinMax([-1, 4, 5, -23, 24]); //[-23, -22, 24]
+  minMinMax([1, 3, -3, -2, 8, -1]); //[-3, 0, 8]
+  minMinMax([2, -4, 8, -5, 9, 7]); //[-5, -3,9]
+*/
+
+// My code
+function minMinMax(arr) {
+  let max = Math.max(...arr);
+  let min = Math.min(...arr);
+  for (let i = min; i < max; i++) {
+    if (!arr.includes(i)) {
+      return [min, i, max];
+    }
+  }
+}
+
+// Alternative
+minMinMax = (array) => {
+  let b = Math.min(...array);
+  while (array.includes(b)) {
+    b += 1;
+  }
+  return [Math.min(...array), b, Math.max(...array)];
+};
