@@ -3646,3 +3646,104 @@ minMinMax = (array) => {
   }
   return [Math.min(...array), b, Math.max(...array)];
 };
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Create a function with two arguments that will return an array of the first n multiples of x.
+
+  Assume both the given number and the number of times to count will be positive numbers greater than 0.
+
+  Return the results as an array or list ( depending on language ).
+
+  Examples
+  countBy(1,10) === [1,2,3,4,5,6,7,8,9,10]
+  countBy(2,5) === [2,4,6,8,10]
+*/
+
+// My code
+function countBy(x, n) {
+  let z = [];
+  for (let i = x; z.length < n; i = i + x) {
+    z.push(i);
+  }
+  return z;
+}
+
+// Altenative
+function countBy(x, n) {
+  let z = [];
+  for (i = 1; i <= n; i++) {
+    z.push(x * i);
+  }
+  return z;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  A child is playing with a ball on the nth floor of a tall building. The height of this floor above ground level, h, is known.
+
+  He drops the ball out of the window. The ball bounces (for example), to two-thirds of its height (a bounce of 0.66).
+
+  His mother looks out of a window 1.5 meters from the ground.
+
+  How many times will the mother see the ball pass in front of her window (including when it's falling and bouncing?
+
+  Three conditions must be met for a valid experiment:
+  Float parameter "h" in meters must be greater than 0
+  Float parameter "bounce" must be greater than 0 and less than 1
+  Float parameter "window" must be less than h.
+  If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
+
+  Note:
+  The ball can only be seen if the height of the rebounding ball is strictly greater than the window parameter.
+
+  Examples:
+  - h = 3, bounce = 0.66, window = 1.5, result is 3
+
+  - h = 3, bounce = 1, window = 1.5, result is -1 
+
+  (Condition 2) not fulfilled).
+*/
+
+// My code
+function bouncingBall(h, bounce, window) {
+  if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) {
+    return -1;
+  }
+
+  let result = 0;
+  for (let i = 0; h > window; i++) {
+    result++;
+    h = h * bounce;
+    if (h > window) result++;
+  }
+
+  return result;
+}
+
+// Alternative
+function bouncingBall(h, bounce, window) {
+  if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) {
+    return -1;
+  }
+
+  let result = 0;
+  while (h > window) {
+    result++;
+    h *= bounce;
+    if (h > window) result += 1;
+  }
+
+  return result;
+}
+
+function bouncingBall(h, bounce, window) {
+  let rebounds = -1;
+  if (bounce > 0 && bounce < 1)
+    while (h > window) (rebounds += 2), (h *= bounce);
+  return rebounds;
+}
