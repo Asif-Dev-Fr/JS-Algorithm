@@ -3789,3 +3789,102 @@ function countConsonants(str) {
 function countConsonants(str) {
   return new Set(str.toLowerCase().replace(/[^a-z]|[aeiou]/g, "")).size;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  As a part of this Kata, you need to create a function that when provided with a triplet, returns the index of the numerical element that lies between the other two elements.
+
+  The input to the function will be an array of three distinct numbers (Haskell: a tuple).
+
+  For example:
+
+  gimme([2, 3, 1]) => 0
+  2 is the number that fits between 1 and 3 and the index of 2 in the input array is 0.
+
+  Another example (just to make sure it is clear):
+
+  gimme([5, 10, 14]) => 1
+  10 is the number that fits between 5 and 14 and the index of 10 in the input array is 1.
+*/
+
+// My code
+function gimme(triplet) {
+  let min = Math.min(...triplet);
+  let max = Math.max(...triplet);
+  let result;
+  for (let n of triplet) {
+    if (n !== min && n !== max) {
+      result = n;
+    }
+  }
+  return triplet.indexOf(result);
+}
+
+// Alternative
+function gimme(a) {
+  return a.indexOf(
+    a.concat().sort(function (a, b) {
+      return a - b;
+    })[1]
+  );
+}
+
+const gimme = function (arr) {
+  return arr.indexOf([...arr].sort((x, y) => x > y)[1]);
+};
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Time to win the lottery!
+
+  Given a lottery ticket (ticket), represented by an array of 2-value arrays, you must find out if you've won the jackpot.
+
+  Example ticket:
+
+  [ [ 'ABC', 65 ], [ 'HGR', 74 ], [ 'BYHT', 74 ] ]
+  To do this, you must first count the 'mini-wins' on your ticket. Each subarray has both a string and a number within it. If the character code of any of the characters in the string matches the number, you get a mini win. Note you can only have one mini win per sub array.
+
+  Once you have counted all of your mini wins, compare that number to the other input provided (win). If your total is more than or equal to (win), return 'Winner!'. Else return 'Loser!'.
+
+  All inputs will be in the correct format. Strings on tickets are not always the same length.
+*/
+
+// My code
+function bingo(ticket, win) {
+  let wins = 0;
+  for (let n of ticket) {
+    for (let i = 0; i < n[0].length; i++) {
+      if (n[1] === n[0].charCodeAt(i)) {
+        wins++;
+      }
+    }
+  }
+  return wins >= win ? "Winner!" : "Loser!";
+}
+
+// Alternative
+function bingo(ticket, win) {
+  if (
+    ticket.filter((a) => a[0].split("").some((b) => b.charCodeAt(0) == a[1]))
+      .length >= win
+  ) {
+    return "Winner!";
+  }
+  return "Loser!";
+}
+
+function bingo(ticket, win) {
+  var count = 0;
+
+  ticket.forEach((game) => {
+    if (game[0].includes(String.fromCharCode(game[1]))) {
+      count++;
+    }
+  });
+
+  return count >= win ? "Winner!" : "Loser!";
+}
