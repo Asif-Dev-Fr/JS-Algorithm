@@ -3888,3 +3888,175 @@ function bingo(ticket, win) {
 
   return count >= win ? "Winner!" : "Loser!";
 }
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  You are given an odd-length array of integers, in which all of them are the same, except for one single number.
+
+  Complete the method which accepts such an array, and returns that single different number.
+
+  The input array will always be valid! (odd-length >= 3)
+
+  Examples
+  [1, 1, 2] ==> 2
+  [17, 17, 3, 17, 17, 17, 17] ==> 3
+  */
+
+// My code
+function stray(numbers) {
+  let obj = {};
+  for (let n of numbers) {
+    if (obj[n]) {
+      obj[n]++;
+    } else {
+      obj[n] = 1;
+    }
+  }
+
+  let result;
+  for (let n in obj) {
+    if (obj[n] === 1) result = n;
+  }
+  return Number(result);
+}
+
+// Alternative
+function stray(numbers) {
+  let a = numbers.sort();
+
+  if (a[0] != a[1]) {
+    return a[0];
+  }
+  return a[a.length - 1];
+}
+
+function stray(numbers) {
+  for (let i in numbers) {
+    if (numbers.indexOf(numbers[i]) === numbers.lastIndexOf(numbers[i])) {
+      return numbers[i];
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  DESCRIPTION:
+  Given two numbers and an arithmetic operator (the name of it, as a string), return the result of the two numbers having that operator used on them.
+
+  a and b will both be positive integers, and a will always be the first number in the operation, and b always the second.
+
+  The four operators are "add", "subtract", "divide", "multiply".
+
+  A few examples:(Input1, Input2, Input3 --> Output)
+
+  5, 2, "add"      --> 7
+  5, 2, "subtract" --> 3
+  5, 2, "multiply" --> 10
+  5, 2, "divide"   --> 2.5
+  Try to do it without using if statements!
+  */
+
+// My code
+function arithmetic(a, b, operator) {
+  switch (operator) {
+    case "add":
+      return a + b;
+    case "subtract":
+      return a - b;
+    case "multiply":
+      return a * b;
+    case "divide":
+      return a / b;
+  }
+}
+
+// Alternative
+function arithmetic(a, b, operator) {
+  optable = { add: "+", subtract: "-", multiply: "*", divide: "/" };
+  return eval(a + optable[operator] + b);
+}
+
+function arithmetic(a, b, operator) {
+  //your code here!
+  var mathFun = {
+    add: function (a, b) {
+      return a + b;
+    },
+    subtract: function (a, b) {
+      return a - b;
+    },
+    multiply: function (a, b) {
+      return a * b;
+    },
+    divide: function (a, b) {
+      return a / b;
+    },
+  };
+
+  return mathFun[operator](a, b);
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------- */
+
+/*
+  A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+
+  Given a string, detect whether or not it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
+  */
+
+// My code
+function isPangram(string) {
+  const alphabet = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
+
+  for (let word of string) {
+    if (alphabet.includes(word.toUpperCase())) {
+      for (let i = 0; i < alphabet.length; i++) {
+        if (word.toUpperCase() === alphabet[i]) {
+          alphabet.splice(i, 1);
+        }
+      }
+    }
+  }
+  return alphabet.length === 0 ? true : false;
+}
+
+// Alternative
+function isPangram(string) {
+  return "abcdefghijklmnopqrstuvwxyz"
+    .split("")
+    .every((x) => string.toLowerCase().includes(x));
+}
+
+function isPangram(string) {
+  return (string.match(/([a-z])(?!.*\1)/gi) || []).length === 26;
+}
