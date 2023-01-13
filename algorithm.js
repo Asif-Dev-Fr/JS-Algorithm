@@ -4140,29 +4140,39 @@ function sumArray(array) {
 */
 
 // My code
-// https://www.codewars.com/kata/58f5c63f1e26ecda7e000029/train/javascript
 function wave(str) {
   let arr = [];
-
-  for (let i = 0; arr.length !== str.length; i++) {
-    console.log(str[i]);
-    //     let slice = str.split("").slice(i).toUpperCase()
-    //     console.log("splice", splice)
-
-    //     let word = str.splice(i, 1, splice)
-    //     console.log("word", word)
-
-    let uppercase = str[i].toUpperCase();
-    // str = str.slice(1)
-    // console.log(uppercase, str)
-    /// str = str.splice(i, 1, "uppercase")
-    let result;
-    if (i === 0) {
-      result = uppercase + str.split("").slice(1).join("");
-    } else if (i > 0 && i < str.length) {
-      result = str.substring(0, i) + uppercase + str.substring(i);
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] && str[i] !== " ") {
+      let result =
+        str.substring(0, i) + str[i].toUpperCase() + str.substring(i + 1);
+      arr.push(result);
     }
-    arr.push(result);
   }
-  console.log(arr);
+  return arr;
+}
+
+// Alternative
+function wave(str) {
+  let result = [];
+  str.split("").forEach((char, index) => {
+    if (/[a-z]/.test(char)) {
+      result.push(
+        str.slice(0, index) + char.toUpperCase() + str.slice(index + 1)
+      );
+    }
+  });
+  return result;
+}
+
+function wave(str) {
+  let newArr = [];
+  for (let i = 0; i < str.length; i++) {
+    let copy = str.split("");
+    if (copy[i] !== " ") {
+      copy[i] = copy[i].toUpperCase();
+      newArr.push(copy.join(""));
+    }
+  }
+  return newArr;
 }
