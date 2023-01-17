@@ -4240,3 +4240,102 @@ const titleCase = (title, minorWords) => {
 
   return cap(result);
 };
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Write a function that returns a string in which firstname is swapped with last name.
+
+  Example(Input --> Output)
+
+  "john McClane" --> "McClane john"
+*/
+
+// My code
+function nameShuffler(str) {
+  return str.split(" ").reverse().join(" ");
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  altERnaTIng cAsE <=> ALTerNAtiNG CaSe
+  Define String.prototype.toAlternatingCase (or a similar function/method such as to_alternating_case/toAlternatingCase/ToAlternatingCase in your selected language; see the initial solution for details) such that each lowercase letter becomes uppercase and each uppercase letter becomes lowercase. For example:
+
+  "hello world".toAlternatingCase() === "HELLO WORLD"
+  "HELLO WORLD".toAlternatingCase() === "hello world"
+  "hello WORLD".toAlternatingCase() === "HELLO world"
+  "HeLLo WoRLD".toAlternatingCase() === "hEllO wOrld"
+  "12345".toAlternatingCase()       === "12345"                   // Non-alphabetical characters are unaffected
+  "1a2b3c4d5e".toAlternatingCase()  === "1A2B3C4D5E"
+  "String.prototype.toAlternatingCase".toAlternatingCase() === "sTRING.PROTOTYPE.TOaLTERNATINGcASE"
+  As usual, your function/method should be pure, i.e. it should not mutate the original string.
+*/
+
+// My code
+String.prototype.toAlternatingCase = function () {
+  let arr = [];
+  for (let element of this.split("")) {
+    if (/[a-z]/.test(element)) {
+      arr.push(element.toUpperCase());
+    } else if (/[A-Z]/.test(element)) {
+      arr.push(element.toLowerCase());
+    } else arr.push(element);
+  }
+  return arr.join("");
+};
+
+String.prototype.toAlternatingCase = function () {
+  return this.split("")
+    .map((a) => (a === a.toUpperCase() ? a.toLowerCase() : a.toUpperCase()))
+    .join("");
+};
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Given the triangle of consecutive odd numbers:
+
+             1
+          3     5
+       7     9    11
+   13    15    17    19
+  21    23    25    27    29
+  ...
+  Calculate the sum of the numbers in the nth row of this triangle (starting at index 1) e.g.: (Input --> Output)
+
+  1 -->  1
+  2 --> 3 + 5 = 8
+*/
+
+// My code
+function rowSumOddNumbers(n) {
+  const oddNumbersArray = [];
+  let startNumber = n * n - (n - 1);
+
+  while (n > 0) {
+    console.log(oddNumbersArray, startNumber);
+    oddNumbersArray.push(startNumber);
+    startNumber += 2;
+    n--;
+  }
+
+  const sum = oddNumbersArray.reduce((a, b) => a + b, 0);
+  return sum;
+}
+
+// Alternative
+function rowSumOddNumbers(n) {
+  return Math.pow(n, 3);
+}
+
+function rowSumOddNumbers(n) {
+  return n * n * n;
+}
+
+function rowSumOddNumbers(n) {
+  return n ** 3;
+}
