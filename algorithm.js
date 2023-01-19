@@ -4407,3 +4407,26 @@ function trim(arr, size) {
     ? arr
     : arr.slice(0, arr.length > 3 ? size - 3 : size) + "...";
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Simple, remove the spaces from the string, then return the resultant string.
+*/
+
+// My code
+function noSpace(x) {
+  return x.replaceAll(" ", "");
+}
+
+// Alternative
+function noSpace(x) {
+  return x.replace(/\s/g, "");
+}
+
+function noSpace(x) {
+  return x.split(" ").join("");
+}
+
+const noSpace = (x) => x.replace(/ /g, "");
