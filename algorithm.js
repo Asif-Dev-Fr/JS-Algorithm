@@ -4483,10 +4483,10 @@ function squareDigits(num) {
   DESCRIPTION:
   Create a function named divisors/Divisors that takes an integer n > 1 and returns an array with all of the integer's divisors(except for 1 and the number itself), from smallest to largest. If the number is prime return the string '(integer) is prime' (null in C#) (use Either String a in Haskell and Result<Vec<u32>, String> in Rust).
 
-Example:
-divisors(12); // should return [2,3,4,6]
-divisors(25); // should return [5]
-divisors(13); // should return "13 is prime"
+  Example:
+  divisors(12); // should return [2,3,4,6]
+  divisors(25); // should return [5]
+  divisors(13); // should return "13 is prime"
 */
 
 // My code
@@ -4506,4 +4506,41 @@ function divisors(integer) {
   for (var i = 2; i <= Math.floor(integer / 2); ++i)
     if (integer % i == 0) res.push(i);
   return res.length ? res : integer + " is prime";
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Digital root is the recursive sum of all the digits in a number.
+
+  Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer.
+
+  Examples
+  16  -->  1 + 6 = 7
+  942  -->  9 + 4 + 2 = 15  -->  1 + 5 = 6
+  132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
+  493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
+
+*/
+
+// My code
+// https://www.codewars.com/kata/541c8630095125aba6000c00/train/javascript
+function digitalRoot(n) {
+  let result = 1;
+  if (n < 10) result = n;
+  else {
+    let arr = String(n).split("");
+    console.log(arr);
+    while (result > 0 && result < 10) {
+      console.log("ici");
+      for (let num of arr) {
+        console.log(result);
+        result += num;
+      }
+      arr = String(result).split("");
+    }
+  }
+
+  return result;
 }
