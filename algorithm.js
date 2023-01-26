@@ -4547,24 +4547,29 @@ function digital_root(n) {
 */
 
 // My code
-// https://www.codewars.com/kata/5b93fecd8463745630001d05/train/javascript
 function snail(column, day, night) {
-  let result = 0;
-  let sum = 0;
-  //   while(sum < column) {
-  //       sum += (day - night)
-  //       result++
-  //       console.log(sum, result, column, sum + (day - night))
-  //   }
-
+  let result = 1;
+  let sum = day;
   for (let i = result; sum < column; result++) {
-    console.log("result", result);
     sum += day - night;
-    if (sum >= column) {
-      break;
-    }
-    // console.log(sum, result, column, sum + (day - night))
   }
-
   return result;
+}
+
+// Alternative
+function snail(column, day, night) {
+  const days = (column - night) / (day - night);
+  return days < 1 ? 1 : Math.ceil(days);
+}
+
+function snail(column, day, night) {
+  let current = 0;
+  let counts = 0;
+  while (current <= column) {
+    counts++;
+    current += day;
+    if (current >= column) break;
+    current -= night;
+  }
+  return counts;
 }
