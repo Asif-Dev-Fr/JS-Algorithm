@@ -4573,3 +4573,87 @@ function snail(column, day, night) {
   }
   return counts;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+  Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
+
+  Note: If the number is a multiple of both 3 and 5, only count it once.
+*/
+
+// My code
+function solution(number) {
+  let sum = 0;
+  for (let i = 0; i < number; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      sum += i;
+    } else if (i % 3 === 0) {
+      sum += i;
+    } else if (i % 5 === 0) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+
+// Alternative
+function solution(number) {
+  var sum = 0;
+
+  for (var i = 3; i < number; i++) {
+    if (i % 3 == 0 || i % 5 == 0) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Instructions
+  Write a function that takes a single string (word) as argument. The function must return an ordered list containing the indexes of all capital letters in the string.
+
+  Example
+  Test.assertSimilar( capitals('CodEWaRs'), [0,3,4,6] );
+*/
+
+// My code
+var capitals = function (word) {
+  let arr = [];
+  for (let l of word) {
+    if (l.match(/[A-Z]/)) arr.push(word.indexOf(l));
+  }
+  return arr;
+};
+
+// Alternative
+var capitals = function (word) {
+  var caps = [];
+  for (var i = 0; i < word.length; i++) {
+    if (word[i].toUpperCase() == word[i]) caps.push(i);
+  }
+  return caps;
+};
+
+var capitals = function (word) {
+  return word
+    .split("")
+    .map(function (l, i) {
+      if (l.toUpperCase() === l) return i;
+    })
+    .filter(function (i) {
+      return i != null;
+    });
+};
+
+const capitals = (word) => {
+  return word.match(/[A-Z]/g).map((x) => {
+    return word.indexOf(x);
+  });
+};
