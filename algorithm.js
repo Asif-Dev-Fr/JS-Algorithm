@@ -4712,3 +4712,71 @@ function calculateYears(principal, interest, tax, desired) {
   }
   return years;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description :
+  ROT13 is a simple letter substitution cipher that replaces a letter with the letter 13 letters after it in the alphabet. ROT13 is an example of the Caesar cipher.
+
+  Create a function that takes a string and returns the string ciphered with Rot13. If there are numbers or special characters included in the string, they should be returned as they are. Only letters from the latin/english alphabet should be shifted, like in the original Rot13 "implementation".
+
+  Example : test = grfg
+*/
+
+// My code
+function rot13(message) {
+  let indexLowerCaseA = "az".charCodeAt(0);
+  let indexLowerCaseZ = "az".charCodeAt(1);
+  let indexUpperCaseA = "AZ".charCodeAt(0);
+  let indexUpperCaseZ = "AZ".charCodeAt(1);
+  let result = [];
+
+  for (let i = 0; i < message.length; i++) {
+    let differenceIndex = 0;
+    let letterIndex = 0;
+    if (message[i].match(/[a-zA-Z]/g)) {
+      if (
+        message[i] === message[i].toLowerCase() &&
+        message.charCodeAt(i) + 13 > indexLowerCaseZ
+      ) {
+        differenceIndex = message.charCodeAt(i) + 13 - indexLowerCaseZ - 1;
+      } else if (
+        message[i] === message[i].toUpperCase() &&
+        message.charCodeAt(i) + 13 > indexUpperCaseZ
+      ) {
+        differenceIndex = message.charCodeAt(i) + 13 - indexUpperCaseZ - 1;
+      }
+
+      if (message[i] === message[i].toLowerCase()) {
+        letterIndex =
+          differenceIndex !== 0
+            ? indexLowerCaseA + differenceIndex
+            : message.charCodeAt(i) + 13;
+      } else if (message[i] === message[i].toUpperCase()) {
+        letterIndex =
+          differenceIndex !== 0
+            ? indexUpperCaseA + differenceIndex
+            : message.charCodeAt(i) + 13;
+      }
+      result.push(String.fromCharCode(letterIndex));
+    } else {
+      result.push(message[i]);
+    }
+  }
+  return result.join("");
+}
+
+// Alternative
+function rot13(message) {
+  var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var b = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+  return message.replace(/[a-z]/gi, (c) => b[a.indexOf(c)]);
+}
+
+const rot13 = (str) =>
+  str.replace(/[a-z]/gi, (letter) =>
+    String.fromCharCode(
+      letter.charCodeAt(0) + (letter.toLowerCase() <= "m" ? 13 : -13)
+    )
+  );
