@@ -4780,3 +4780,68 @@ const rot13 = (str) =>
       letter.charCodeAt(0) + (letter.toLowerCase() <= "m" ? 13 : -13)
     )
   );
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description :
+  In this simple assignment you are given a number and have to make it negative. But maybe the number is already negative?
+
+  Examples
+  makeNegative(1);    // return -1
+  makeNegative(-5);   // return -5
+  makeNegative(0);    // return 0
+  makeNegative(0.12); // return -0.12
+*/
+
+// My code
+function makeNegative(num) {
+  return -Math.abs(num);
+}
+
+// Alternative
+function makeNegative(num) {
+  return num < 0 ? num : -num;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description :
+  In this simple assignment you are given a number and have to make it negative. But maybe the number is already negative?
+
+  Examples
+  makeNegative(1);    // return -1
+  makeNegative(-5);   // return -5
+  makeNegative(0);    // return 0
+  makeNegative(0.12); // return -0.12
+*/
+
+// My code
+function narcissistic(value) {
+  let arr = String(value).split("");
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += Math.pow(arr[i], arr.length);
+  }
+  return sum === value;
+}
+
+// Alterntive
+function narcissistic(value) {
+  return (
+    ("" + value).split("").reduce(function (p, c) {
+      return p + Math.pow(c, ("" + value).length);
+    }, 0) == value
+  );
+}
+
+function narcissistic(value) {
+  return (
+    value
+      .toString()
+      .split("")
+      .map((x, i, arr) => x ** arr.length)
+      .reduce((a, b) => +a + +b) === value
+  );
+}
