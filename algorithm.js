@@ -4845,3 +4845,115 @@ function narcissistic(value) {
       .reduce((a, b) => +a + +b) === value
   );
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description:
+  Remove an exclamation mark from the end of a string. For a beginner kata, you can assume that the input data is always a string, no need to verify it.
+
+  Examples
+  remove("Hi!") == "Hi"
+  remove("Hi!!!") == "Hi!!"
+  remove("!Hi") == "!Hi"
+  remove("!Hi!") == "!Hi"
+  remove("Hi! Hi!") == "Hi! Hi"
+  remove("Hi") == "Hi"
+*/
+
+// My code
+function remove(string) {
+  let word = string.split("");
+  if (word[word.length - 1] === "!") word.pop();
+  return word.join("");
+}
+
+// Alternative
+const remove = (s) => s.replace(/!$/, "");
+
+function remove(s) {
+  return s.endsWith("!") ? s.slice(0, -1) : s;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  The rgb function is incomplete. Complete it so that passing in RGB decimal values will result in a hexadecimal representation being returned. Valid decimal values for RGB are 0 - 255. Any values that fall out of that range must be rounded to the closest valid value.
+
+  Note: Your answer should always be 6 characters long, the shorthand with 3 will not work here.
+
+  The following are examples of expected output values:
+
+  rgb(255, 255, 255) // returns FFFFFF
+  rgb(255, 255, 300) // returns FFFFFF
+  rgb(0,0,0) // returns 000000
+  rgb(148, 0, 211) // returns 9400D3
+*/
+
+// Solution
+function rgb(r, g, b) {
+  return decToHex(r) + decToHex(g) + decToHex(b);
+}
+
+function decToHex(c) {
+  if (c > 255) return "FF";
+  else if (c < 0) return "00";
+  else {
+    return c.toString(16).padStart(2, "0").toUpperCase();
+  }
+}
+
+// Hexadecimal is base 16. Break down the words: hexa, meaning 6; decimal, meaning 10. 10 + 6 = 16.
+/*
+  For Number objects, the toString() method returns a string representation of the object in the specified radix.
+
+  Parameters :
+
+    radix: Optional. An integer between 2 and 36 specifying the base to use for representing numeric values.
+
+  This means it converts the number into a string, and based on the radix. The syntax for Number.prototype.toString is:
+
+  number.toString([radix])
+  Where radix is optional. If you specify the radix, it will convert with that base, so 16 is hexadecimal. If radix is not specified, 10 (decimal) is assumed. Here's a snippet:
+
+  let num = 16;
+
+  console.log(num.toString()) //"16", base 10 is assumed here if no radix given
+  console.log(num.toString(16)) //"10", base 16 is given
+*/
+
+/* 
+  The padStart() method pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length. The padding is applied from the start of the current string.
+
+  const str1 = '5';
+  console.log(str1.padStart(2, '0'));
+  // Expected output: "05"
+
+  const str1 = '5';
+  console.log(str1.padStart(3, 'F0'));
+  // Expected output: "F05"
+*/
+
+// Alternative
+function rgb(r, g, b) {
+  return toHex(r) + toHex(g) + toHex(b);
+}
+
+function toHex(d) {
+  if (d < 0) {
+    return "00";
+  }
+  if (d > 255) {
+    return "FF";
+  }
+  return ("0" + Number(d).toString(16)).slice(-2).toUpperCase();
+}
+
+function rgb(r, g, b) {
+  return `${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+}
+
+function toHex(num) {
+  return Math.max(0, Math.min(255, num)).toString(16).padStart(2, "0");
+}
