@@ -4957,3 +4957,97 @@ function rgb(r, g, b) {
 function toHex(num) {
   return Math.max(0, Math.min(255, num)).toString(16).padStart(2, "0");
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description :
+  Write a function to convert a name into initials. This kata strictly takes two words with one space in between them.
+
+  The output should be two capital letters with a dot separating them.
+
+  It should look like this:
+
+  Sam Harris => S.H
+
+  patrick feeney => P.F
+*/
+
+// My code
+function abbrevName(name) {
+  return name
+    .split(" ")
+    .map((n) => {
+      return n.toUpperCase().split("").splice(0, 1);
+    })
+    .join(".");
+}
+
+// Alternative
+function abbrevName(name) {
+  var nameArray = name.split(" ");
+  return (nameArray[0][0] + "." + nameArray[1][0]).toUpperCase();
+}
+
+function abbrevName(name) {
+  return name
+    .split(" ")
+    .map((i) => i[0].toUpperCase())
+    .join(".");
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description :
+  Create a function that checks if a number n is divisible by two numbers x AND y. All inputs are positive, non-zero numbers.
+
+  Examples:
+  1) n =   3, x = 1, y = 3 =>  true because   3 is divisible by 1 and 3
+  2) n =  12, x = 2, y = 6 =>  true because  12 is divisible by 2 and 6
+  3) n = 100, x = 5, y = 3 => false because 100 is not divisible by 3
+  4) n =  12, x = 7, y = 5 => false because  12 is neither divisible by 7 nor 5
+*/
+
+// My code
+function isDivisible(n, x, y) {
+  return n % x === 0 && n % y === 0;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Description :
+  Given an array of integers.
+
+  Return an array, where the first element is the count of positives numbers and the second element is sum of negative numbers. 0 is neither positive nor negative.
+
+  If the input is an empty array or is null, return an empty array.
+
+  Example
+  For input [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15], you should return [10, -65].
+*/
+
+// My code
+function countPositivesSumNegatives(input) {
+  let positive = 0;
+  let negatif = 0;
+  if (input === null || input.length === 0) return [];
+  for (let n of input) {
+    if (n !== 0) {
+      if (n < 0) negatif += n;
+      else positive++;
+    }
+  }
+  return [positive, negatif];
+}
+
+// Alternative
+function countPositivesSumNegatives(input) {
+  return input && input.length
+    ? [
+        input.filter((p) => p > 0).length,
+        input.filter((n) => n < 0).reduce((a, b) => a + b, 0),
+      ]
+    : [];
+}
