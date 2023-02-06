@@ -5051,3 +5051,26 @@ function countPositivesSumNegatives(input) {
       ]
     : [];
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Given a set of numbers, return the additive inverse of each. Each positive becomes negatives, and the negatives become positives.
+
+  invert([1,2,3,4,5]) == [-1,-2,-3,-4,-5]
+  invert([1,-2,3,-4,5]) == [-1,2,-3,4,-5]
+  invert([]) == []
+  You can assume that all values are integers. Do not mutate the input array/list.
+*/
+
+// My code
+function invert(array) {
+  if (array.length === 0) return [];
+  let arr = array;
+  return arr.map((n) => {
+    return n >= 0 ? -Math.abs(n) : Math.abs(n);
+  });
+}
+
+// Alternative
+const invert = (array) => array.map((num) => -num);
