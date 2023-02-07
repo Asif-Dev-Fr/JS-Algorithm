@@ -5055,6 +5055,7 @@ function countPositivesSumNegatives(input) {
 /* ---------------------------------------------------------------------------------------------------------------------------*/
 
 /*
+  DESCRIPTION:
   Given a set of numbers, return the additive inverse of each. Each positive becomes negatives, and the negatives become positives.
 
   invert([1,2,3,4,5]) == [-1,-2,-3,-4,-5]
@@ -5074,3 +5075,71 @@ function invert(array) {
 
 // Alternative
 const invert = (array) => array.map((num) => -num);
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Given a 2D ( nested ) list ( array, vector, .. ) of size m * n, your task is to find the sum of the minimum values in each row.
+
+  For Example:
+
+  [ [ 1, 2, 3, 4, 5 ]        #  minimum value of row is 1
+  , [ 5, 6, 7, 8, 9 ]        #  minimum value of row is 5
+  , [ 20, 21, 34, 56, 100 ]  #  minimum value of row is 20
+  ]
+  So the function should return 26 because the sum of the minimums is 1 + 5 + 20 = 26.
+
+  Note: You will always be given a non-empty list containing positive values.
+*/
+
+// My code
+function sumOfMinimums(arr) {
+  let sum = 0;
+  for (let array of arr) {
+    sum += Math.min(...array);
+  }
+  return sum;
+}
+
+function sumOfMinimums(arr) {
+  let sum = 0;
+  for (let array of arr) {
+    array.sort((a, b) => a - b);
+    sum += array[0];
+  }
+  return sum;
+}
+
+// Alternative
+function sumOfMinimums(arr) {
+  return arr.reduce((p, c) => p + Math.min(...c), 0);
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Your task is to make function, which returns the sum of a sequence of integers.
+
+  The sequence is defined by 3 non-negative values: begin, end, step (inclusive).
+
+  If begin value is greater than the end, function should returns 0
+
+  Examples
+
+  2,2,2 --> 2
+  2,6,2 --> 12 (2 + 4 + 6)
+  1,5,1 --> 15 (1 + 2 + 3 + 4 + 5)
+  1,5,3  --> 5 (1 + 4)
+*/
+
+// My code
+const sequenceSum = (begin, end, step) => {
+  if (begin > end) return 0;
+  let sum = 0;
+  for (let i = begin; i <= end; i += step) {
+    sum += i;
+  }
+  return sum;
+};
