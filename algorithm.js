@@ -5225,3 +5225,82 @@ const solve = (s) =>
   s.replace(/[A-Z]/g, "").length < s.length / 2
     ? s.toUpperCase()
     : s.toLowerCase();
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Write a function that when given a URL as a string, parses out just the domain name and returns it as a string. For example:
+
+  * url = "http://github.com/carbonfive/raygun" -> domain name = "github"
+  * url = "http://www.zombie-bites.com"         -> domain name = "zombie-bites"
+  * url = "https://www.cnet.com"                -> domain name = cnet"
+*/
+
+// My code
+function domainName(url) {
+  url = url.replace("https://", "");
+  url = url.replace("http://", "");
+  url = url.replace("www.", "");
+  return url.split(".")[0];
+}
+
+// Alternative
+function domainName(url) {
+  return url.replace(/.+\/\/|www.|\..+/g, "");
+}
+
+function domainName(url) {
+  return url
+    .replace("http://", "")
+    .replace("https://", "")
+    .replace("www.", "")
+    .split(".")[0];
+}
+
+function domainName(url) {
+  return url.replace(/(https?:\/\/)?(www\.)?/, "").split(".")[0];
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Your online store likes to give out coupons for special occasions. Some customers try to cheat the system by entering invalid codes or using expired coupons.
+
+  Task
+  Your mission:
+  Write a function called checkCoupon which verifies that a coupon code is valid and not expired.
+
+  A coupon is no more valid on the day AFTER the expiration date. All dates will be passed as strings in this format: "MONTH DATE, YEAR".
+
+  Examples:
+  checkCoupon("123", "123", "July 9, 2015", "July 9, 2015")  ===  true
+  checkCoupon("123", "123", "July 9, 2015", "July 2, 2015")  ===  false
+*/
+
+// My code
+function checkCoupon(enteredCode, correctCode, currentDate, expirationDate) {
+  let d1 = new Date(currentDate);
+  let d2 = new Date(expirationDate);
+
+  if (enteredCode !== correctCode) return false;
+  else if (d1.getTime() > d2.getTime()) return false;
+  else if (enteredCode === correctCode && d1.getTime() <= d2.getTime())
+    return true;
+}
+
+// Alternative
+function checkCoupon(enteredCode, correctCode, currentDate, expirationDate) {
+  return (
+    enteredCode === correctCode &&
+    Date.parse(expirationDate) >= Date.parse(currentDate)
+  );
+}
+
+function checkCoupon(enteredCode, correctCode, currentDate, expirationDate) {
+  return (
+    enteredCode === correctCode &&
+    new Date(currentDate) <= new Date(expirationDate)
+  );
+}
