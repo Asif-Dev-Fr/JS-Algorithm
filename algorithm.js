@@ -5430,3 +5430,85 @@ function nbDig(n, d) {
   }
   return count.match(re).length;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Complete the function/method so that it returns the url with anything after the anchor (#) removed.
+
+  Examples
+  "www.codewars.com#about" --> "www.codewars.com"
+  "www.codewars.com?page=1" -->"www.codewars.com?page=1"
+*/
+
+function removeUrlAnchor(url) {
+  return url.split("#")[0];
+}
+
+// Alternative
+function removeUrlAnchor(url) {
+  return url.replace(/#.*/gi, "");
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age,  oldest age].
+
+  The order of the numbers passed in could be any order. The array will always include at least 2 items. If there are two or more oldest age, then return both of them in array format.
+
+  For example (Input --> Output):
+
+  [1, 2, 10, 8] --> [8, 10]
+  [1, 5, 87, 45, 8, 8] --> [45, 87]
+  [1, 3, 10, 0]) --> [3, 10]
+*/
+
+function twoOldestAges(ages) {
+  ages = ages.sort((a, b) => b - a);
+  return [ages[1], ages[0]];
+}
+
+// Alternative
+function twoOldestAges(ages) {
+  return ages
+    .sort((a, b) => {
+      return a - b;
+    })
+    .slice(-2);
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age,  oldest age].
+
+  The order of the numbers passed in could be any order. The array will always include at least 2 items. If there are two or more oldest age, then return both of them in array format.
+
+  For example (Input --> Output):
+
+  [1, 2, 10, 8] --> [8, 10]
+  [1, 5, 87, 45, 8, 8] --> [45, 87]
+  [1, 3, 10, 0]) --> [3, 10]
+*/
+
+function smallEnough(a, limit) {
+  for (let n of a) {
+    if (n >= limit) return false;
+  }
+  return true;
+}
+
+// Alternative
+function smallEnough(a, limit) {
+  return Math.max(...a) <= limit;
+}
+
+const smallEnough = (a, l) => a.every((e) => e <= l);
+
+function smallEnough(array, limit) {
+  return array.filter((value) => value > limit).length > 0 ? false : true;
+}
