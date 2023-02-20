@@ -5586,3 +5586,59 @@ function checkExam(array1, array2) {
   }
   return score < 0 ? 0 : score;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  In this Kata we are passing a number (n) into a function.
+
+  Your code will determine if the number passed is even (or not).
+
+  The function needs to return either a true or false.
+
+  Numbers may be positive or negative, integers or floats.
+
+  Floats with decimal part non equal to zero are considered UNeven for this kata.
+*/
+
+// My code
+function testEven(n) {
+  return n % 2 === 0;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Write a function named sumDigits which takes a number as input and returns the sum of the absolute value of each of the number's decimal digits.
+
+  For example: (Input --> Output)
+
+  10 --> 1
+  99 --> 18
+  -32 --> 5
+  Let's assume that all numbers in the input will be integer values.
+*/
+
+// My code
+function sumDigits(number) {
+  let arr = String(number).split("");
+  let sum = 0;
+  for (let n of arr) {
+    if (n.match(/[1-9]/g)) {
+      sum += Number(n);
+    }
+  }
+  return sum;
+}
+
+// Alternative
+function sumDigits(number) {
+  return Math.abs(number)
+    .toString()
+    .split("")
+    .reduce(function (a, b) {
+      return +a + +b;
+    }, 0);
+}
