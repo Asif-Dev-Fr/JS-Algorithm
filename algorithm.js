@@ -5700,3 +5700,98 @@ function largest(n, xs) {
     })
     .slice(xs.length - n);
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Write a program that outputs the top n elements from a list.
+
+  Example:
+
+  largest(2, [7,6,5,4,3,2,1])
+  // => [6,7]
+*/
+
+// My code
+function getEvenNumbers(numbersArray) {
+  return numbersArray.filter((n) => n % 2 === 0);
+}
+
+// Alternative
+function isEven(num) {
+  return num % 2 == 0;
+}
+
+function getEvenNumbers(numbersArray) {
+  // filter out the odd numbers
+  var filtered = numbersArray.filter(isEven);
+  return filtered;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Given a sequence of numbers, find the largest pair sum in the sequence.
+
+  For example
+
+  [10, 14, 2, 23, 19] -->  42 (= 23 + 19)
+  [99, 2, 2, 23, 19]  --> 122 (= 99 + 23)
+*/
+
+// My code
+function largestPairSum(numbers) {
+  numbers.sort((a, b) => b - a);
+  return numbers[0] + numbers[1];
+}
+
+// Alternative
+function largestPairSum(numbers) {
+  var [a, b] = numbers.sort((a, b) => b - a);
+  return a + b;
+}
+
+const largestPairSum = (numbers) =>
+  numbers
+    .sort((a, b) => b - a)
+    .slice(0, 2)
+    .reduce((a, b) => a + b);
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  If　a = 1, b = 2, c = 3 ... z = 26
+
+  Then l + o + v + e = 54
+
+  and f + r + i + e + n + d + s + h + i + p = 108
+
+  So friendship is twice as strong as love :-)
+
+  Your task is to write a function which calculates the value of a word based off the sum of the alphabet positions of its characters.
+
+  The input will always be made of only lowercase letters and will never be empty.
+*/
+
+// My code
+function wordsToMarks(string) {
+  let alphabet = "abcdefghijklmnopqrstuvwxyz";
+  let sum = 0;
+  for (let i = 0; i < string.length; i++) {
+    sum += alphabet.split("").indexOf(string[i]) + 1;
+  }
+  return sum;
+}
+
+// Alternative
+const wordsToMarks = (s) =>
+  [...s].reduce((res, c) => (res += c.charCodeAt() - 96), 0);
+
+function wordsToMarks(str) {
+  var sum = 0;
+  for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) - 96;
+  return sum;
+}
