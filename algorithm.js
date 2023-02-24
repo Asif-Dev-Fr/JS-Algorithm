@@ -5909,3 +5909,75 @@ function goodVsEvil(good, evil) {
     return "Battle Result: Evil eradicates all trace of Good";
   else return "Battle Result: No victor on this battle field";
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Challenge:
+
+  Given a two-dimensional array of integers, return the flattened version of the array with all the integers in the sorted (ascending) order.
+
+  Example:
+
+  Given [[3, 2, 1], [4, 6, 5], [], [9, 7, 8]], your function should return [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+  Addendum:
+
+  Please, keep in mind, that JavaScript is by default sorting objects alphabetically. For more information, please consult:
+*/
+
+// My code
+function flattenAndSort(array) {
+  if (array.length === 0) {
+    return [];
+  }
+  let res = [];
+  for (let arr of array) {
+    if (arr.length > 0) {
+      for (let n of arr) {
+        res.push(n);
+      }
+    }
+  }
+  return res.sort((a, b) => a - b);
+}
+
+// Alternative
+function flattenAndSort(array) {
+  return [].concat(...array).sort((a, b) => a - b);
+}
+
+const flattenAndSort = (array) => array.flat().sort((a, b) => a - b);
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Your task is to remove all duplicate words from a string, leaving only single (first) words entries.
+
+  Example:
+
+  Input:
+
+  'alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta'
+
+  Output:
+
+  'alpha beta gamma delta'
+*/
+
+// My code
+function removeDuplicateWords(s) {
+  let arr = [];
+  for (let word of s.split(" ")) {
+    if (!arr.includes(word)) arr.push(word);
+  }
+  return arr.join(" ");
+}
+
+// Alternative
+const removeDuplicateWords = (s) => {
+  const set = new Set(s.split(" "));
+  return Array.from(set).join(" ");
+};
