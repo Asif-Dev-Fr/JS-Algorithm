@@ -6021,3 +6021,36 @@ function countDevelopers(list) {
     (x) => x.continent == "Europe" && x.language == "JavaScript"
   ).length;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Complete the method which accepts an array of integers, and returns one of the following:
+
+  "yes, ascending" - if the numbers in the array are sorted in an ascending order
+  "yes, descending" - if the numbers in the array are sorted in a descending order
+  "no" - otherwise
+  You can assume the array will always be valid, and there will always be one correct answer.
+*/
+
+// My code
+function isSortedAndHow(array) {
+  let init = array.slice();
+  let asc = array.slice();
+  let desc = init;
+  desc.sort((a, b) => b - a);
+  asc.sort((a, b) => a - b);
+  if (array.toString() === asc.toString()) return "yes, ascending";
+  else if (array.toString() === desc.toString()) return "yes, descending";
+  else return "no";
+}
+
+// Alternative
+function isSortedAndHow(arr) {
+  return arr.every((x, i) => i == 0 || arr[i] >= arr[i - 1])
+    ? "yes, ascending"
+    : arr.every((x, i) => i == 0 || arr[i] <= arr[i - 1])
+    ? "yes, descending"
+    : "no";
+}
