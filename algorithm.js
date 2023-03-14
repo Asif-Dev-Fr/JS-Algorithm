@@ -6054,3 +6054,55 @@ function isSortedAndHow(arr) {
     ? "yes, descending"
     : "no";
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  What if we need the length of the words separated by a space to be added at the end of that same word and have it returned as an array?
+
+  Example(Input --> Output)
+
+  "apple ban" --> ["apple 5", "ban 3"]
+  "you will win" -->["you 3", "will 4", "win 3"]
+  Your task is to write a function that takes a String and returns an Array/list with the length of each word added to each element.
+*/
+
+// My code
+function addLength(str) {
+  return str.split(" ").map((el) => {
+    return el + " " + el.length;
+  });
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Given an integer as input, can you round it to the next (meaning, "greater than or equal") multiple of 5?
+
+  Examples:
+
+  input:    output:
+  0    ->   0
+  2    ->   5
+  3    ->   5
+  12   ->   15
+  21   ->   25
+  30   ->   30
+  -2   ->   0
+  -5   ->   -5
+  etc.
+  Input may be any positive or negative integer (including 0).
+*/
+
+// My code
+function roundToNext5(n) {
+  return Math.ceil(n / 5) * 5;
+}
+
+// Alternative
+function roundToNext5(n) {
+  while (n % 5 !== 0) n++;
+  return n;
+}
