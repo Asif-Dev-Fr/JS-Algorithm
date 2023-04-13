@@ -6472,3 +6472,117 @@ function inArray(array1, array2) {
 function inArray(array1, array2) {
   return array1.filter((a1) => array2.find((a2) => a2.match(a1))).sort();
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  In the following 6 digit number:
+
+  283910
+  91 is the greatest sequence of 2 consecutive digits.
+
+  In the following 10 digit number:
+
+  1234567890
+  67890 is the greatest sequence of 5 consecutive digits.
+
+  Complete the solution so that it returns the greatest sequence of five consecutive digits found within the number given. The number will be passed in as a string of only digits. It should return a five digit integer. The number passed may be as large as 1000 digits.
+
+*/
+
+// My code
+function solution(digits) {
+  let result = 0;
+  for (let i = 0; i < digits.length; i++) {
+    let cocat =
+      digits[i] + digits[i + 1] + digits[i + 2] + digits[i + 3] + digits[i + 4];
+    let fiveDigits = Number(cocat);
+    if (result < fiveDigits) result = fiveDigits;
+  }
+  return result;
+}
+
+// Alternative
+function solution(digits) {
+  let answer = 0;
+
+  for (let i = 0; i < digits.length; i++) {
+    let number = digits.substr(i, 5); //each loop iteration pulls the next 5 digits into a substring
+    if (Number(number) > answer) {
+      //convert to number and compare against answer
+      answer = Number(number);
+    }
+  }
+  return answer;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Your car is old, it breaks easily. The shock absorbers are gone and you think it can handle about 15 more bumps before it dies totally.
+
+  Unfortunately for you, your drive is very bumpy! Given a string showing either flat road (_) or bumps (n). If you are able to reach home safely by encountering 15 bumps or less, return Woohoo!, otherwise return Car Dead
+
+*/
+
+// My code
+function bump(x) {
+  return x.split("").filter((n) => n === "n").length <= 15
+    ? "Woohoo!"
+    : "Car Dead";
+}
+
+// Alternative
+const bump = (x) => (x.split("n").length > 16 ? "Car Dead" : "Woohoo!");
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities (the multiplicity of a member is the number of times it appears). "Same" means, here, that the elements in b are the elements in a squared, regardless of the order.
+
+  Examples
+  Valid arrays
+  a = [121, 144, 19, 161, 19, 144, 19, 11]  
+  b = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
+  comp(a, b) returns true because in b 121 is the square of 11, 14641 is the square of 121, 20736 the square of 144, 361 the square of 19, 25921 the square of 161, and so on. It gets obvious if we write b's elements in terms of squares:
+
+  a = [121, 144, 19, 161, 19, 144, 19, 11] 
+  b = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
+
+*/
+
+// My code
+function comp(array1, array2) {
+  if (array1 === null || array2 === null || array1.length !== array2.length) {
+    return false;
+  }
+  for (let n of array1) {
+    if (array2.includes(n * n)) {
+      let index = array2.indexOf(n * n);
+      array2.splice(index, 1);
+    }
+  }
+  return array2.length > 0 ? false : true;
+}
+
+// Alterantive
+function comp(array1, array2) {
+  if (array1 == null || array2 == null) return false;
+  array1.sort((a, b) => a - b);
+  array2.sort((a, b) => a - b);
+  return array1.map((v) => v * v).every((v, i) => v == array2[i]);
+}
+
+function comp(a, b) {
+  return (
+    !!a &&
+    !!b &&
+    a
+      .map((x) => x * x)
+      .sort()
+      .join() == b.sort().join()
+  );
+}
