@@ -6586,3 +6586,133 @@ function comp(a, b) {
       .join() == b.sort().join()
   );
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative.
+
+  Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case
+
+*/
+
+// My code
+var countBits = function (n) {
+  return n
+    .toString(2)
+    .split("")
+    .filter((x) => {
+      return x === "1";
+    }).length;
+};
+
+/* "toString(2) - makes binary value from number" */
+
+// Alternative
+let countBits = (n) => n.toString(2).split("0").join("").length;
+
+var countBits = function (n) {
+  return n.toString(2).replace(/0/g, "").length;
+};
+
+var countBits = function (n) {
+  return n
+    .toString(2)
+    .split("")
+    .reduce((a, b) => parseInt(a) + parseInt(b), 0);
+};
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  A square of squares
+  You like building blocks. You especially like building blocks that are squares. And what you even like more, is to arrange them into a square of square building blocks!
+
+  However, sometimes, you can't arrange them into a square. Instead, you end up with an ordinary rectangle! Those blasted things! If you just had a way to know, whether you're currently working in vain… Wait! That's it! You just have to check if your number of building blocks is a perfect square.
+
+  Task
+  Given an integral number, determine if it's a square number:
+
+  In mathematics, a square number or perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself.
+
+  The tests will always use some integral number, so don't worry about that in dynamic typed languages.
+
+*/
+
+// My code
+var isSquare = function (n) {
+  if (n < 0) return false;
+  return Math.ceil(Math.sqrt(n)) == Math.floor(Math.sqrt(n));
+};
+
+var isSquare = function (n) {
+  if (n < 0) return false;
+  return Math.round(Math.sqrt(n)) * Math.round(Math.sqrt(n)) === n;
+};
+
+// Alternative
+function isSquare(n) {
+  return Math.sqrt(n) % 1 === 0;
+}
+
+const isSquare = (n) => Number.isInteger(Math.sqrt(n));
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Deoxyribonucleic acid (DNA) is a chemical found in the nucleus of cells and carries the "instructions" for the development and functioning of living organisms.
+
+  If you want to know more: http://en.wikipedia.org/wiki/DNA
+
+  In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". Your function receives one side of the DNA (string, except for Haskell); you need to return the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
+
+  More similar exercise are found here: http://rosalind.info/problems/list-view/ (source)
+
+  Example: (input --> output)
+
+  "ATTGC" --> "TAACG"
+  "GTAT" --> "CATA"
+
+*/
+
+// My code
+
+function DNAStrand(dna) {
+  let result = [];
+  for (let l of dna) {
+    if (l === "A") result.push("T");
+    else if (l === "T") result.push("A");
+    else if (l === "C") result.push("G");
+    else if (l === "G") result.push("C");
+  }
+  return result.join("");
+}
+
+// Alternative
+var pairs = { A: "T", T: "A", C: "G", G: "C" };
+
+function DNAStrand(dna) {
+  return dna
+    .split("")
+    .map((v) => {
+      return pairs[v];
+    })
+    .join("");
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  Implement a function that accepts 3 integer values a, b, c. The function should return true if a triangle can be built with the sides of given length and false in any other case.
+
+  (In this case, all triangles must have surface greater than 0 to be accepted).
+
+*/
+
+// My code
+function isTriangle(a, b, c) {
+  return a + b > c && b + c > a && c + a > b;
+}
