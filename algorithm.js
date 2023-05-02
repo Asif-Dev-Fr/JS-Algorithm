@@ -6820,7 +6820,6 @@ function helloWorld() {
   return H + e + l + l + o + comma + blank + W + o + r + l + d + exclamation;
 }
 
-
 /*---------------------------------------------------------------------------------------------------------------------------*/
 
 /*
@@ -6844,4 +6843,64 @@ function helloWorld() {
 */
 
 // My code
-const binaryArrayToNumber = arr => parseInt(arr.join(''), 2);
+const binaryArrayToNumber = (arr) => parseInt(arr.join(""), 2);
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+
+  Examples
+  pigIt('Pig latin is cool'); // igPay atinlay siay oolcay
+  pigIt('Hello world !');     // elloHay orldway !
+
+*/
+
+// My code
+function pigIt(str) {
+  let arr = [];
+  for (let word of str.split(" ")) {
+    if (word.match(/[a-zA-Z]/g)) {
+      let slice = word.split("").slice(1);
+      let splice = word.split("").splice(0, 1);
+      let joinWord = slice.join("") + splice + "ay";
+      arr.push(joinWord);
+    } else arr.push(word);
+  }
+  return arr.join(" ");
+}
+
+// Alternative
+function pigIt(str) {
+  return str.replace(/(\w)(\w*)(\s|$)/g, "$2$1ay$3");
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (HH:MM:SS)
+
+  HH = hours, padded to 2 digits, range: 00 - 99
+  MM = minutes, padded to 2 digits, range: 00 - 59
+  SS = seconds, padded to 2 digits, range: 00 - 59
+  The maximum time never exceeds 359999 (99:59:59)
+
+  You can find some examples in the test fixtures.
+
+*/
+
+// My code
+function humanReadable(seconds) {
+  let hours = parseInt(seconds / 3600);
+  let minutes = parseInt((seconds - hours * 3600) / 60);
+  let second = Math.floor(seconds - (hours * 3600 + minutes * 60));
+  let result =
+    (hours < 10 ? "0" + hours : hours) +
+    ":" +
+    (minutes < 10 ? "0" + minutes : minutes) +
+    ":" +
+    (second < 10 ? "0" + second : second);
+  return result;
+}
