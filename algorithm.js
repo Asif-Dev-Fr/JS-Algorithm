@@ -6904,3 +6904,26 @@ function humanReadable(seconds) {
     (second < 10 ? "0" + second : second);
   return result;
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+  DESCRIPTION:
+  Enjoying your holiday, you head out on a scuba diving trip!
+
+  Disaster!! The boat has caught fire!!
+
+  You will be provided a string that lists many boat related items. If any of these items are "Fire" you must spring into action. Change any instance of "Fire" into "~~". Then return the string.
+
+  Go to work!
+
+*/
+
+// My code
+function fireFight(s) {
+  return s.replaceAll("Fire", "~~");
+}
+
+// Alternative
+const fireFight = s =>
+  s.replace(/Fire/g, `~~`);
